@@ -107,6 +107,9 @@ public class PlayerController : MonoBehaviour
                 
             my_rigidbody.AddForce(projected_move_dir.normalized * move_speed);
         }
+        else {
+            my_rigidbody.AddForce(player_move_dir.normalized * move_speed);
+        }
 
         if (player_move_dir.magnitude > 0) {
             Quaternion to_rotation = Quaternion.LookRotation(player_move_dir);
