@@ -1,12 +1,13 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.Tracing;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public Vector3 center_of_mass;
-    public float move_speed;
-    public float rotate_speed;
+    public Vector3 center_of_mass = new Vector3(0, -1, 0);
+    public float move_speed = 30;
+    public float rotate_speed = 360;
     public GameObject _camera;
 
     private Vector3 player_move_dir;
@@ -14,7 +15,12 @@ public class PlayerController : MonoBehaviour
     private KeyCode previous_input = KeyCode.None;
     private float ad_speed = 0;
 
-    [SerializeField] private float drag, x_coeff, y_coeff, y_intercept;
+    [SerializeField] private float drag = 0.99f, x_coeff = 1, y_coeff = 10, y_intercept = 13;
+
+
+
+    [SerializeField] private bool is_jump = false;
+    private Coroutine jump_coroutine;
 
     // Start is called before the first frame update
     void Start()
@@ -27,12 +33,31 @@ public class PlayerController : MonoBehaviour
     {
         player_move_input();
         player_acceleration();
+        jump_check();
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
         move();
+    }
+
+    private void jump_check() {
+        if (Physics.BoxCast(transform.position, (transform.lossyScale - new Vector3(0, 0.05f, 0)) / 2, -transform.up, transform.rotation, 0.1f)) {
+            if (jump_coroutine != null) {
+                StopCoroutine(jump_coroutine);
+            }
+            is_jump = false;
+        }
+        else {
+            jump_coroutine = StartCoroutine(jump_check_coroutine());
+        }
+
+    }
+
+    IEnumerator jump_check_coroutine() {
+        yield return new WaitForSeconds(0.2f);
+        is_jump = true;
     }
 
     private void player_acceleration() {
@@ -70,16 +95,25 @@ public class PlayerController : MonoBehaviour
     }
 
     private void move() {
-        my_rigidbody.AddForce(player_move_dir.normalized * move_speed);
+        if (!is_jump) {
+            Vector3 ground_up;
+            if (Physics.Raycast(transform.position, -transform.up, out RaycastHit hit, 1f)) {
+                ground_up = hit.normal;
+            }
+            else {
+                ground_up = transform.up;
+            }
+            Vector3 projected_move_dir = Vector3.ProjectOnPlane(player_move_dir, ground_up);
+                
+            my_rigidbody.AddForce(projected_move_dir.normalized * move_speed);
+        }
 
         if (player_move_dir.magnitude > 0) {
             Quaternion to_rotation = Quaternion.LookRotation(player_move_dir);
             Quaternion player_rotation = Quaternion.Euler(0, my_rigidbody.rotation.eulerAngles.y, 0);
 
             to_rotation = Quaternion.RotateTowards(player_rotation, to_rotation, rotate_speed * Time.fixedDeltaTime);
-
             my_rigidbody.rotation = Quaternion.Euler(my_rigidbody.rotation.eulerAngles.x, to_rotation.eulerAngles.y, my_rigidbody.rotation.eulerAngles.z);
-
         }
     }
 }
