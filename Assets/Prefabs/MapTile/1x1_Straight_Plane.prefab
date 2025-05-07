@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7274181501912870548}
   - component: {fileID: 5280449075338471140}
   - component: {fileID: 3875541861150151986}
+  - component: {fileID: 2592752793484321428}
   m_Layer: 0
   m_Name: 1x1_Straight_Plane
   m_TagString: Untagged
@@ -115,11 +116,24 @@ MeshCollider:
   m_GameObject: {fileID: 1856933913516289878}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!65 &2592752793484321428
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1856933913516289878}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 10, y: 1, z: 10}
+  m_Center: {x: 0, y: -0.5, z: 0}
 --- !u!1 &7572561541101101770
 GameObject:
   m_ObjectHideFlags: 0
