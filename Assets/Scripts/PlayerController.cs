@@ -1,85 +1,123 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.Tracing;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public Vector3 center_of_mass;
-    public float move_speed;
-    public float rotate_speed;
-    public GameObject _camera;
+    public Vector3 centerOfMass = new Vector3(0, -1, 0);
+    public float moveSpeed = 30;
+    public float rotateSpeed = 360;
+    public GameObject virtualCamera;
 
-    private Vector3 player_move_dir;
-    private Rigidbody my_rigidbody;
-    private KeyCode previous_input = KeyCode.None;
-    private float ad_speed = 0;
+    private Vector3 playerMoveDirection;
+    private Rigidbody myRigidbody;
+    private KeyCode previousInput = KeyCode.None;
+    private float adSpeed = 0;
 
-    [SerializeField] private float drag, x_coeff, y_coeff, y_intercept;
+    [SerializeField] private float drag = 0.99f, xCoeff = 1, yCoeff = 10, yIntercept = 13;
+
+
+
+    [SerializeField] private bool isJump = false;
+    private Coroutine jumpCoroutine;
 
     // Start is called before the first frame update
     void Start()
     {
-        my_rigidbody = gameObject.GetComponent<Rigidbody>();
-        my_rigidbody.centerOfMass = center_of_mass;
+        myRigidbody = gameObject.GetComponent<Rigidbody>();
+        myRigidbody.centerOfMass = centerOfMass;
     }
 
     void Update()
     {
-        player_move_input();
-        player_acceleration();
+        playerMoveInput();
+        playerAcceleration();
+        jumpCheck();
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
         move();
+        rotate();
     }
 
-    private void player_acceleration() {
-        if (Input.GetKeyDown(KeyCode.A) & previous_input != KeyCode.A) {
-            previous_input = KeyCode.A;
-            ad_speed += 1;
+    private void jumpCheck() {
+        if (Physics.BoxCast(transform.position, (transform.lossyScale - new Vector3(0, 0.1f, 0)) / 2, -transform.up, transform.rotation, 0.1f)) {
+            if (jumpCoroutine != null) {
+                StopCoroutine(jumpCoroutine);
+            }
+            isJump = false;
+            //myRigidbody.useGravity = false;
         }
-        if (Input.GetKeyDown(KeyCode.D) & previous_input != KeyCode.D) {
-            previous_input = KeyCode.D;
-            ad_speed += 1;
+        else {
+            jumpCoroutine = StartCoroutine(jumpCheckCoroutine());
         }
 
-        ad_speed *= drag;
-        move_speed = y_intercept + Mathf.Sqrt(x_coeff * ad_speed) * y_coeff;
     }
 
-    private void player_move_input() {
-        Vector3 camera_forward = _camera.transform.forward;
-        camera_forward -= new Vector3(0, camera_forward.y, 0);
-        camera_forward = camera_forward.normalized;
+    IEnumerator jumpCheckCoroutine() {
+        yield return new WaitForSeconds(0.1f);
+        isJump = true;
+        //myRigidbody.useGravity = true;
+    }
 
-        player_move_dir = Vector3.zero;
+    private void playerAcceleration() {
+        if (Input.GetKeyDown(KeyCode.A) & previousInput != KeyCode.A) {
+            previousInput = KeyCode.A;
+            adSpeed += 1;
+        }
+        if (Input.GetKeyDown(KeyCode.D) & previousInput != KeyCode.D) {
+            previousInput = KeyCode.D;
+            adSpeed += 1;
+        }
+
+        adSpeed *= drag;
+        moveSpeed = yIntercept + Mathf.Sqrt(xCoeff * adSpeed) * yCoeff;
+    }
+
+    private void playerMoveInput() {
+        Vector3 cameraForward = virtualCamera.transform.forward;
+        cameraForward -= new Vector3(0, cameraForward.y, 0);
+        cameraForward = cameraForward.normalized;
+
+        playerMoveDirection = Vector3.zero;
         if (Input.GetKey(KeyCode.UpArrow)) {
-            player_move_dir += camera_forward;
+            playerMoveDirection += cameraForward;
         }
         if (Input.GetKey(KeyCode.DownArrow)) {
-            player_move_dir -= camera_forward;
+            playerMoveDirection -= cameraForward;
         }
         if (Input.GetKey(KeyCode.LeftArrow)) {
-            player_move_dir -= Vector3.Cross(Vector3.up, camera_forward);
+            playerMoveDirection -= Vector3.Cross(Vector3.up, cameraForward);
         }
         if (Input.GetKey(KeyCode.RightArrow)) {
-            player_move_dir += Vector3.Cross(Vector3.up, camera_forward);
+            playerMoveDirection += Vector3.Cross(Vector3.up, cameraForward);
         }
     }
 
     private void move() {
-        my_rigidbody.AddForce(player_move_dir.normalized * move_speed);
+        if (!isJump) {
+            Vector3 groundNormal;
+            if (Physics.Raycast(transform.position, -transform.up, out RaycastHit hit, 1f)) groundNormal = hit.normal;
+            else groundNormal = transform.up;
 
-        if (player_move_dir.magnitude > 0) {
-            Quaternion to_rotation = Quaternion.LookRotation(player_move_dir);
-            Quaternion player_rotation = Quaternion.Euler(0, my_rigidbody.rotation.eulerAngles.y, 0);
+            Vector3 projected_move_dir = Vector3.ProjectOnPlane(playerMoveDirection, groundNormal);
+            myRigidbody.AddForce(projected_move_dir.normalized * moveSpeed);
+        }
+        else {
+            //myRigidbody.AddForce(playerMoveDirection.normalized * moveSpeed * 0.2f);
+        }
+    }
 
-            to_rotation = Quaternion.RotateTowards(player_rotation, to_rotation, rotate_speed * Time.fixedDeltaTime);
+    private void rotate() {
+        if (playerMoveDirection.magnitude > 0) {
+            Quaternion toRotation = Quaternion.LookRotation(playerMoveDirection);
+            Quaternion playerRotation = Quaternion.Euler(0, myRigidbody.rotation.eulerAngles.y, 0);
 
-            my_rigidbody.rotation = Quaternion.Euler(my_rigidbody.rotation.eulerAngles.x, to_rotation.eulerAngles.y, my_rigidbody.rotation.eulerAngles.z);
-
+            toRotation = Quaternion.RotateTowards(playerRotation, toRotation, rotateSpeed * Time.fixedDeltaTime);
+            myRigidbody.rotation = Quaternion.Euler(myRigidbody.rotation.eulerAngles.x, toRotation.eulerAngles.y, myRigidbody.rotation.eulerAngles.z);
         }
     }
 }
