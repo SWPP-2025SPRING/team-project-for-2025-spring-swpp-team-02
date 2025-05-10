@@ -106,6 +106,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: 1x1_Corner_Plane (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 5703614426652933250, guid: 906db3075019ef84f8f91a3cf3a9fa09, type: 3}
+      propertyPath: m_Center.x
+      value: -5
+      objectReference: {fileID: 0}
     - target: {fileID: 5705994808580961184, guid: 906db3075019ef84f8f91a3cf3a9fa09, type: 3}
       propertyPath: m_RootOrder
       value: 1
