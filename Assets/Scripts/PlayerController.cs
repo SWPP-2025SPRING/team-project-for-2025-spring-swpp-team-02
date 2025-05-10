@@ -112,7 +112,7 @@ public class PlayerController : MonoBehaviour
     }
 
     private void rotate() {
-        if (playerMoveDirection.magnitude > 0) {
+        if (playerMoveDirection.magnitude > 0 && !isJump) {
             Quaternion toRotation = Quaternion.LookRotation(playerMoveDirection);
             Quaternion playerRotation = Quaternion.Euler(0, myRigidbody.rotation.eulerAngles.y, 0);
 
