@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
     public Vector3 centerOfMass = new Vector3(0, -1, 0);
     public float moveSpeed = 30;
     public float maxSpeed = 25;
+    public float maxUpSpeed = 23, maxDownSpeed = 27;
     public float rotateSpeed = 360;
     public GameObject virtualCamera;
 
@@ -105,13 +106,23 @@ public class PlayerController : MonoBehaviour
 
             Vector3 projected_move_dir = Vector3.ProjectOnPlane(playerMoveDirection, groundNormal);
             myRigidbody.AddForce(projected_move_dir.normalized * moveSpeed);
+
+            if (Vector3.Dot(transform.forward, Vector3.up) > 0.05) {
+                maxSpeed = maxUpSpeed;
+            }
+            else if (Vector3.Dot(transform.forward, Vector3.up) < -0.05) {
+                maxSpeed = maxDownSpeed;
+            }
+            else {
+                maxSpeed = 20;
+            }
         }
         else {
             myRigidbody.AddForce(-Vector3.up * moveSpeed * moveSpeed / 40f);
         }
 
         if (myRigidbody.velocity.magnitude > maxSpeed) {
-            myRigidbody.velocity = myRigidbody.velocity.normalized * maxSpeed;
+            myRigidbody.velocity += (myRigidbody.velocity.normalized * maxSpeed - myRigidbody.velocity) * 0.1f;
         }
     }
 
