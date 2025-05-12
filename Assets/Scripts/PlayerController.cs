@@ -1,12 +1,12 @@
 using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics.Tracing;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
     public Vector3 centerOfMass = new Vector3(0, -1, 0);
     public float moveSpeed = 30;
+    public float maxSpeed = 25;
     public float rotateSpeed = 360;
     public GameObject virtualCamera;
 
@@ -107,12 +107,16 @@ public class PlayerController : MonoBehaviour
             myRigidbody.AddForce(projected_move_dir.normalized * moveSpeed);
         }
         else {
-            //myRigidbody.AddForce(playerMoveDirection.normalized * moveSpeed * 0.2f);
+            myRigidbody.AddForce(-Vector3.up * moveSpeed * moveSpeed / 40f);
+        }
+
+        if (myRigidbody.velocity.magnitude > maxSpeed) {
+            myRigidbody.velocity = myRigidbody.velocity.normalized * maxSpeed;
         }
     }
 
     private void rotate() {
-        if (playerMoveDirection.magnitude > 0) {
+        if (playerMoveDirection.magnitude > 0 && !isJump) {
             Quaternion toRotation = Quaternion.LookRotation(playerMoveDirection);
             Quaternion playerRotation = Quaternion.Euler(0, myRigidbody.rotation.eulerAngles.y, 0);
 
