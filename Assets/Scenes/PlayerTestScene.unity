@@ -723,7 +723,7 @@ Transform:
   m_Children:
   - {fileID: 777217807}
   m_Father: {fileID: 2054937180}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 40, y: 0, z: 0}
 --- !u!20 &1073882268
 Camera:
@@ -903,6 +903,162 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1145448312
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1145448313}
+  - component: {fileID: 1145448314}
+  m_Layer: 0
+  m_Name: Dolly Track
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1145448313
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1145448312}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 6.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2054937180}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1145448314
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1145448312}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d37e5385efd7064cb1d54c94960acae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Resolution: 20
+  m_Appearance:
+    pathColor: {r: 0, g: 1, b: 0, a: 1}
+    inactivePathColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+    width: 0.2
+  m_Looped: 0
+  m_Waypoints:
+  - position: {x: 0.27805233, y: 0, z: -27.579672}
+    tangent: {x: 0.18294811, y: 0, z: 9.0284195}
+    roll: 0
+  - position: {x: 0, y: 0, z: 0}
+    tangent: {x: 0, y: 0, z: 13.02536}
+    roll: 0
+  - position: {x: 0, y: -8.504108, z: 27.116049}
+    tangent: {x: -0.5305865, y: -6.403941, z: 9.217293}
+    roll: 0
+  - position: {x: 0.049774885, y: -16.364426, z: 55.808334}
+    tangent: {x: -0.22389674, y: 0.29002762, z: 8.721985}
+    roll: 0
+  - position: {x: -0.07427508, y: -11.02495, z: 74.789696}
+    tangent: {x: -0.06081915, y: 3.5080261, z: 5.992218}
+    roll: 0
+  - position: {x: 0.31910515, y: -8.506699, z: 104.22574}
+    tangent: {x: 0.1759634, y: -0.58693695, z: 6.9061203}
+    roll: 0
+  - position: {x: 9.4286175, y: -10.232187, z: 138.63101}
+    tangent: {x: 8.441999, y: 0, z: 12.939178}
+    roll: 0
+  - position: {x: 18.74079, y: -9.78673, z: 171.53336}
+    tangent: {x: 0.1610527, y: 0, z: 14.514435}
+    roll: 0
+  - position: {x: 19.120968, y: -16.027454, z: 211.1783}
+    tangent: {x: 0, y: -4.975897, z: 8.891983}
+    roll: 0
+  - position: {x: 19.245968, y: -34.591133, z: 245.73967}
+    tangent: {x: 0.007827759, y: -8.224968, z: 14.097061}
+    roll: 0
+  - position: {x: 18.683107, y: -48.755043, z: 282.66296}
+    tangent: {x: -0.38788033, y: 0, z: 7.2123413}
+    roll: 0
+  - position: {x: 7.9561186, y: -48.74829, z: 309.6878}
+    tangent: {x: -10.047266, y: 0, z: 9.181915}
+    roll: 0
+  - position: {x: -10.295482, y: -54.346725, z: 344.75967}
+    tangent: {x: 1.0270758, y: -8.333641, z: 15.743439}
+    roll: 0
+  - position: {x: -9.295482, y: -73.51984, z: 380.1375}
+    tangent: {x: 0, y: -7.464142, z: 15.420593}
+    roll: 0
+  - position: {x: -9.170482, y: -80.81632, z: 423.58646}
+    tangent: {x: 0.0048856735, y: -0.53182983, z: 22.655273}
+    roll: 0
+  - position: {x: -8.858982, y: -80.48814, z: 459.03482}
+    tangent: {x: 0.023430824, y: 0.040542603, z: 21.301239}
+    roll: 0
+  - position: {x: -24.053848, y: -79.50695, z: 496.00854}
+    tangent: {x: -9.610973, y: 0, z: 7.6354675}
+    roll: 0
+  - position: {x: -46.504787, y: -79.56151, z: 513.6477}
+    tangent: {x: -9.610973, y: -0.047584534, z: 7.7000732}
+    roll: 0
+  - position: {x: -68.09586, y: -86.86747, z: 530.3243}
+    tangent: {x: -8.1872635, y: -5.4314346, z: 7.7000732}
+    roll: 0
+  - position: {x: -81.87296, y: -96.43479, z: 542.8663}
+    tangent: {x: -6.3177567, y: -5.4314346, z: 5.538574}
+    roll: 0
+  - position: {x: -91.10184, y: -100.455864, z: 567.30634}
+    tangent: {x: 0, y: 0, z: 15}
+    roll: 0
+  - position: {x: -91.07493, y: -100.455864, z: 608.5572}
+    tangent: {x: 0, y: 0, z: 15}
+    roll: 0
+  - position: {x: -91.02033, y: -100.455864, z: 656.647}
+    tangent: {x: 0, y: 0, z: 15}
+    roll: 0
+  - position: {x: -90.993965, y: -100.455864, z: 701.8615}
+    tangent: {x: 0, y: 0, z: 15}
+    roll: 0
+  - position: {x: -90.782875, y: -100.455864, z: 750.25543}
+    tangent: {x: 0, y: 0, z: 15}
+    roll: 0
+  - position: {x: -90.746216, y: -100.455864, z: 800.5497}
+    tangent: {x: 0, y: 0, z: 15}
+    roll: 0
+  - position: {x: -90.71707, y: -100.455864, z: 848.5716}
+    tangent: {x: 0, y: 0, z: 15}
+    roll: 0
+  - position: {x: -90.682396, y: -100.455864, z: 901.9728}
+    tangent: {x: 0, y: 0, z: 15}
+    roll: 0
+  - position: {x: -90.753624, y: -100.455864, z: 953.19543}
+    tangent: {x: 0, y: 0, z: 15}
+    roll: 0
+  - position: {x: -75.57142, y: -100.455864, z: 995.75946}
+    tangent: {x: 17.86428, y: 0, z: 18.657654}
+    roll: 0
+  - position: {x: -34.42032, y: -100.455864, z: 1011.1622}
+    tangent: {x: 15.264589, y: 0, z: 0}
+    roll: 0
+  - position: {x: 8.13126, y: -100.455864, z: 1011.232}
+    tangent: {x: 15.264589, y: 0, z: 0}
+    roll: 0
+  - position: {x: 52.0041, y: -100.455864, z: 1011.0084}
+    tangent: {x: 15.264589, y: 0, z: 0}
+    roll: 0
+  - position: {x: 103.219666, y: -100.455864, z: 1010.7462}
+    tangent: {x: 15.264589, y: 0, z: 0}
+    roll: 0
+  - position: {x: 152.84042, y: -100.455864, z: 1010.5693}
+    tangent: {x: 15.264589, y: 0, z: 0}
+    roll: 0
 --- !u!1 &1159738841
 GameObject:
   m_ObjectHideFlags: 0
@@ -1277,7 +1433,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2054937180}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 40, y: 0, z: 0}
 --- !u!114 &1327029253
 MonoBehaviour:
@@ -1362,14 +1518,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27d847f74f913dd43b9a02d3f93b1f23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  center_of_mass: {x: 0, y: -1, z: 0}
-  move_speed: 30
-  rotate_speed: 360
-  _camera: {fileID: 1073882266}
+  centerOfMass: {x: 0, y: -1, z: 0}
+  moveSpeed: 30
+  maxSpeed: 25
+  maxUpSpeed: 23
+  maxDownSpeed: 27
+  rotateSpeed: 360
+  virtualCamera: {fileID: 0}
   drag: 0.99
-  x_coeff: 1
-  y_coeff: 10
-  y_intercept: 13
+  xCoeff: 1
+  yCoeff: 10
+  yIntercept: 13
+  isJump: 0
 --- !u!65 &1356537750
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1482,14 +1642,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27d847f74f913dd43b9a02d3f93b1f23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  center_of_mass: {x: 0, y: -1, z: 0}
-  move_speed: 0
-  rotate_speed: 0
-  _camera: {fileID: 0}
+  centerOfMass: {x: 0, y: -1, z: 0}
+  moveSpeed: 30
+  maxSpeed: 25
+  maxUpSpeed: 23
+  maxDownSpeed: 27
+  rotateSpeed: 360
+  virtualCamera: {fileID: 0}
   drag: 0
-  x_coeff: 0
-  y_coeff: 0
-  y_intercept: 0
+  xCoeff: 1
+  yCoeff: 10
+  yIntercept: 13
+  isJump: 0
 --- !u!54 &1902859902
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1615,7 +1779,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2054937180}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1943396045
 MonoBehaviour:
@@ -1685,6 +1849,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1145448313}
   - {fileID: 1943396044}
   - {fileID: 1073882267}
   - {fileID: 1327029252}
