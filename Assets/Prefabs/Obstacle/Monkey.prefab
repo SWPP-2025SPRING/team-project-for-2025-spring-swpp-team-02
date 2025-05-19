@@ -20,7 +20,7 @@ GameObject:
   - component: {fileID: 2546592871699326488}
   m_Layer: 0
   m_Name: Monkey
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -34,8 +34,8 @@ Transform:
   m_GameObject: {fileID: 2546592871699326947}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -4.96, y: -0.79, z: 0.34623533}
-  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
-  m_ConstrainProportionsScale: 1
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -111,14 +111,14 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2546592871699326947}
   serializedVersion: 2
-  m_Mass: 2
+  m_Mass: 5
   m_Drag: 0.5
   m_AngularDrag: 5
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 2
+  m_Interpolate: 1
   m_Constraints: 0
-  m_CollisionDetection: 1
+  m_CollisionDetection: 2
 --- !u!114 &3273167308391565886
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -131,12 +131,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 732da527ab14f13458922e317fc8c372, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 1
+  moveSpeed: 15
   once: 0
   centerOfMass: {x: 0, y: -1, z: 0}
-  forwardSpeed: 5
-  flyForce: 10
-  trackLine: {fileID: 0}
+  flyForce: 70
   pointReachThreshold: 1
 --- !u!136 &2546592871699326487
 CapsuleCollider:

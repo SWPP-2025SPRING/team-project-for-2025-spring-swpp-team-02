@@ -15,7 +15,7 @@ public class ObstacleBase : MonoBehaviour
         
     }
 
-    protected virtual void Update()
+    protected virtual void FixedUpdate()
     {
         if (isMoving)
         {
