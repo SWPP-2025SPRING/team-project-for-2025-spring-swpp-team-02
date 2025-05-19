@@ -104,7 +104,10 @@ public class Monkey : ObstacleBase
         //}
 
         if (!hasLanded || trackPoints == null || trackPoints.Length == 0 || currentPointIndex >= trackPoints.Length)
+        {
             return;
+        }
+            
 
         Vector3 targetPoint = trackPoints[currentPointIndex];
         Vector3 toTarget = targetPoint - transform.position;
