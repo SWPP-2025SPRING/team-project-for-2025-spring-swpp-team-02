@@ -12,10 +12,12 @@ public class Monkey : ObstacleBase
     private Rigidbody rb;
     private Transform playerTransform;
 
-    public LineRenderer trackLine; // Æ®·¢À» ±×¸° ¶óÀÎ ·»´õ·¯
-    public float pointReachThreshold = 5f; // Á¡¿¡ ¾ó¸¶³ª °¡±î¿öÁö¸é ´ÙÀ½ Á¡À¸·Î ³Ñ¾î°¡´ÂÁö
+    public LineRenderer trackLine; // Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½×¸ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    public float pointReachThreshold = 5f; // ï¿½ï¿½ï¿½ï¿½ ï¿½ó¸¶³ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ñ¾î°¡ï¿½ï¿½ï¿½ï¿½
     private int currentPointIndex = 0;
     private Vector3[] trackPoints;
+
+    private bool isPlayingParticle = false;
 
     protected override void Start()
     {
@@ -29,7 +31,7 @@ public class Monkey : ObstacleBase
         //trackPoints = new Vector3[trackLine.positionCount];
         //trackLine.GetPositions(trackPoints);
 
-        // Æ®·¢ Æ÷ÀÎÆ® ·Îµå
+        // Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ® ï¿½Îµï¿½
         int count = trackLine.positionCount;
         trackPoints = new Vector3[count];
         for (int i = 0; i < count; i++)
@@ -37,7 +39,7 @@ public class Monkey : ObstacleBase
             trackPoints[i] = trackLine.GetPosition(i);
         }
 
-        // ¿ø¼þÀÌ¿Í °¡Àå °¡±î¿î Æ÷ÀÎÆ® ÀÎµ¦½º Ã£±â
+        // ï¿½ï¿½ï¿½ï¿½ï¿½Ì¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ® ï¿½Îµï¿½ï¿½ï¿½ Ã£ï¿½ï¿½
         float minDist = float.MaxValue;
         int closestIndex = 0;
         for (int i = 0; i < trackPoints.Length; i++)
@@ -60,7 +62,7 @@ public class Monkey : ObstacleBase
 
     protected override void Move()
     {
-        // ÇÃ·¹ÀÌ¾î ¹Ý´ë¹æÇâÀ¸·Î °¡´Â ¹öÀü
+        // ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ ï¿½Ý´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         //if (hasLanded && playerTransform != null)
         //{
         //    float distance = Vector3.Distance(transform.position, playerTransform.position);
@@ -104,13 +106,13 @@ public class Monkey : ObstacleBase
             }
             else
             {
-                // ¸¶Áö¸· Æ÷ÀÎÆ® µµ´Þ ½Ã Á¤Áö ¶Ç´Â ºñÈ°¼ºÈ­
+                // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ç´ï¿½ ï¿½ï¿½È°ï¿½ï¿½È­
                 Off();
                 return;
             }
         }
 
-        // °æ»ç¸éÀ» µû¶ó ÀÚ¿¬½º·´°Ô ÀÌµ¿
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ú¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½
         if (Physics.Raycast(transform.position + Vector3.up * 0.5f, Vector3.down, out RaycastHit hit, 2f))
         {
             Vector3 slideDir = Vector3.ProjectOnPlane(toTarget, hit.normal).normalized;
@@ -129,6 +131,15 @@ public class Monkey : ObstacleBase
         {
             Vector3 hitDirection = (transform.position - collision.transform.position).normalized;
             rb.AddForce((hitDirection + Vector3.up) * flyForce, ForceMode.Impulse);
+
+            if (!isPlayingParticle)
+            {
+                ParticleSystem particle = ParticleManager.instance.GetParticle("MonkeyCollision");
+                particle.transform.position = collision.contacts[0].point + new Vector3(0, 0.3f, 0);
+                particle.transform.rotation = Quaternion.LookRotation(collision.contacts[0].normal);
+                particle.Play();
+                isPlayingParticle = true;
+            }
 
             Invoke(nameof(Off), 1f);
         }
