@@ -13,6 +13,10 @@ public class Area : MonoBehaviour
         {
             foreach (ObstacleBase e in obstacles)
             {
+                if (e.gameObject.activeSelf == false)
+                {
+                    e.gameObject.SetActive(true);
+                }
                 e.StartMove();
             }
         }

@@ -5,14 +5,13 @@ using UnityEngine;
 public class Monkey : ObstacleBase
 {
     public Vector3 centerOfMass = new Vector3(0, -1, 0);
-    public float forwardSpeed = 5f;
-    public float flyForce = 10f;
+    public float flyForce = 70f;
 
     private bool hasLanded = false;
     private Rigidbody rb;
     private Transform playerTransform;
 
-    public LineRenderer trackLine; // 트랙을 그린 라인 렌더러
+    private LineRenderer trackLine; // 트랙을 그린 라인 렌더러
     public float pointReachThreshold = 5f; // 점에 얼마나 가까워지면 다음 점으로 넘어가는지
     private int currentPointIndex = 0;
     private Vector3[] trackPoints;
@@ -25,7 +24,7 @@ public class Monkey : ObstacleBase
         rb.centerOfMass = centerOfMass;
 
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
-
+        trackLine = GameObject.FindGameObjectWithTag("MonkeyLine").GetComponent<LineRenderer>();
         //trackPoints = new Vector3[trackLine.positionCount];
         //trackLine.GetPositions(trackPoints);
 
@@ -49,7 +48,27 @@ public class Monkey : ObstacleBase
                 closestIndex = i;
             }
         }
+
+        if (closestIndex < trackPoints.Length - 1)
+        {
+            Vector3 a = trackPoints[closestIndex];
+            Vector3 b = trackPoints[closestIndex + 1];
+            Vector3 toMonkey = transform.position - a;
+            Vector3 segment = b - a;
+
+            // 투영 길이로 판단: 원숭이가 a-b 구간의 선분 사이에 있는 경우
+            float dot = Vector3.Dot(toMonkey, segment.normalized);
+            float segmentLength = segment.magnitude;
+
+            if (dot > 0 && dot < segmentLength)
+            {
+                // 현재 위치가 a-b 사이에 있음 → 다음 포인트 선택
+                closestIndex += 1;
+            }
+        }
         currentPointIndex = closestIndex;
+
+        gameObject.SetActive(false);
     }
 
     public override void StartMove()
@@ -91,7 +110,19 @@ public class Monkey : ObstacleBase
         Vector3 toTarget = targetPoint - transform.position;
         Vector2 vec = new Vector2(targetPoint.x, targetPoint.z);
         Vector2 vec2 = new Vector2(transform.position.x, transform.position.z);
+        Vector2 vec3 = new Vector2(playerTransform.position.x, playerTransform.position.z);
         float distanceToTarget = (vec - vec2).magnitude;
+
+        float distanceToPlayer = Vector3.Distance(transform.position, playerTransform.position);
+        float distanceToTargetPlayer = (vec - vec3).magnitude;
+
+        if (distanceToPlayer > 100f || distanceToTargetPlayer < distanceToTarget - 5f)
+        {
+            // 플레이어와의 거리가 멀 경우 or 플레이어 뒤에 있을 경우 비활성화
+            Debug.Log("monkey off");
+            Off();
+            return;
+        }
 
         if (distanceToTarget < pointReachThreshold)
         {
@@ -100,7 +131,7 @@ public class Monkey : ObstacleBase
                 currentPointIndex++;
                 targetPoint = trackPoints[currentPointIndex];
                 toTarget = targetPoint - transform.position;
-                Debug.Log(targetPoint);
+                //Debug.Log(targetPoint);
             }
             else
             {
@@ -110,13 +141,15 @@ public class Monkey : ObstacleBase
             }
         }
 
-        // 경사면을 따라 자연스럽게 이동
+        Vector3 slideDir = toTarget.normalized;
+
         if (Physics.Raycast(transform.position + Vector3.up * 0.5f, Vector3.down, out RaycastHit hit, 2f))
         {
-            Vector3 slideDir = Vector3.ProjectOnPlane(toTarget, hit.normal).normalized;
-            Vector3 targetPosition = rb.position + slideDir * forwardSpeed * Time.fixedDeltaTime;
-            rb.MovePosition(targetPosition);
+            slideDir = Vector3.ProjectOnPlane(toTarget, hit.normal).normalized;
         }
+
+        Vector3 targetPosition = rb.position + slideDir * moveSpeed * Time.fixedDeltaTime;
+        rb.MovePosition(targetPosition);
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -125,7 +158,7 @@ public class Monkey : ObstacleBase
         {
             hasLanded = true;
         }
-        else if (collision.gameObject.CompareTag("Player"))
+        else if (collision.gameObject.CompareTag("Player") || collision.gameObject.CompareTag("Obstacle"))
         {
             Vector3 hitDirection = (transform.position - collision.transform.position).normalized;
             rb.AddForce((hitDirection + Vector3.up) * flyForce, ForceMode.Impulse);
