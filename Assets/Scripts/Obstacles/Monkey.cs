@@ -58,9 +58,8 @@ public class Monkey : ObstacleBase
 
             // 투영 길이로 판단: 원숭이가 a-b 구간의 선분 사이에 있는 경우
             float dot = Vector3.Dot(toMonkey, segment.normalized);
-            float segmentLength = segment.magnitude;
 
-            if (dot > 0 && dot < segmentLength)
+            if (dot > 0)
             {
                 // 현재 위치가 a-b 사이에 있음 → 다음 포인트 선택
                 closestIndex += 1;
@@ -111,13 +110,13 @@ public class Monkey : ObstacleBase
 
         Vector3 targetPoint = trackPoints[currentPointIndex];
         Vector3 toTarget = targetPoint - transform.position;
-        Vector2 vec = new Vector2(targetPoint.x, targetPoint.z);
-        Vector2 vec2 = new Vector2(transform.position.x, transform.position.z);
-        Vector2 vec3 = new Vector2(playerTransform.position.x, playerTransform.position.z);
-        float distanceToTarget = (vec - vec2).magnitude;
+        Vector2 pointVec2 = new Vector2(targetPoint.x, targetPoint.z);
+        Vector2 monkeyVec2 = new Vector2(transform.position.x, transform.position.z);
+        Vector2 playerVec2 = new Vector2(playerTransform.position.x, playerTransform.position.z);
+        float distanceToTarget = (pointVec2 - monkeyVec2).magnitude;
 
         float distanceToPlayer = Vector3.Distance(transform.position, playerTransform.position);
-        float distanceToTargetPlayer = (vec - vec3).magnitude;
+        float distanceToTargetPlayer = (pointVec2 - playerVec2).magnitude;
 
         if (distanceToPlayer > 100f || distanceToTargetPlayer < distanceToTarget - 5f)
         {

@@ -11,13 +11,13 @@ public class Area : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            foreach (ObstacleBase e in obstacles)
+            foreach (ObstacleBase obstacle in obstacles)
             {
-                if (e.gameObject.activeSelf == false)
+                if (obstacle.gameObject.activeSelf == false)
                 {
-                    e.gameObject.SetActive(true);
+                    obstacle.gameObject.SetActive(true);
                 }
-                e.StartMove();
+                obstacle.StartMove();
             }
         }
     }

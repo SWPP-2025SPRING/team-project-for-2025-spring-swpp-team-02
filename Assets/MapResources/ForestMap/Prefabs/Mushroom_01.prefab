@@ -151,7 +151,8 @@ GameObject:
   - component: {fileID: 5610622173749090815}
   - component: {fileID: 3384208936736509099}
   - component: {fileID: 9109228112611924850}
-  - component: {fileID: 8376272747481921258}
+  - component: {fileID: 2321067716989755083}
+  - component: {fileID: 4741198870963217154}
   m_Layer: 0
   m_Name: Mushroom_01_LOD0
   m_TagString: Untagged
@@ -224,7 +225,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &8376272747481921258
+--- !u!65 &2321067716989755083
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -235,5 +236,19 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.2, y: 0.3406743, z: 0.2}
-  m_Center: {x: 0, y: 0.1702209, z: 0}
+  m_Size: {x: 0.1936827, y: 0.13788453, z: 0.22224516}
+  m_Center: {x: 0.00976686, y: 0.2582494, z: 0.0030555555}
+--- !u!136 &4741198870963217154
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8668046474177936419}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.038905527
+  m_Height: 0.18921886
+  m_Direction: 1
+  m_Center: {x: 0.007255504, y: 0.080511406, z: 0.0013223039}
