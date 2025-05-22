@@ -6,11 +6,12 @@ TagManager:
   tags:
   - Wall
   - Obstacle
+  - MonkeyLine
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - CaveMap
   - Water
   - UI
   - Ground
