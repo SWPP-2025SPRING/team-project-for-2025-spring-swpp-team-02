@@ -9,9 +9,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 444247440589350737}
-  - component: {fileID: 444247440589350741}
-  - component: {fileID: 444247440589350739}
+  - component: {fileID: 2078871243667528508}
   - component: {fileID: 444247440589350740}
+  - component: {fileID: 469998019989973565}
+  - component: {fileID: 444247440589350739}
+  - component: {fileID: 444247440589350741}
   - component: {fileID: 444247440589350745}
   - component: {fileID: 444247440589350744}
   - component: {fileID: 444247440589350743}
@@ -39,19 +41,60 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &444247440589350741
-BoxCollider:
+--- !u!114 &2078871243667528508
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 444247440589350573}
-  m_Material: {fileID: 13400000, guid: 176407d7923703c4f8ac892ab2290bac, type: 2}
-  m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.5, y: 0.99, z: 0.5}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fff2b527e6c37464389c3d5beb0d820f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wallParticleCooltime: 1
+  obstacleParticleCooltime: 1
+--- !u!114 &444247440589350740
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 444247440589350573}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27d847f74f913dd43b9a02d3f93b1f23, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  centerOfMass: {x: 0, y: -0.2, z: 0}
+  virtualCamera: {fileID: 0}
+  moveSpeed: 0
+  maxSpeed: 17
+  maxUpSpeed: 23
+  maxDownSpeed: 27
+  rotateSpeed: 360
+  drag: 0.95
+  xCoeff: 1
+  yCoeff: 3
+  yIntercept: 25
+  isJump: 0
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 64
+--- !u!114 &469998019989973565
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 444247440589350573}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c873f3e51fb6b39428bc7613d1c4ff25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemCount: 0
 --- !u!54 &444247440589350739
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -68,28 +111,19 @@ Rigidbody:
   m_Interpolate: 2
   m_Constraints: 0
   m_CollisionDetection: 1
---- !u!114 &444247440589350740
-MonoBehaviour:
+--- !u!65 &444247440589350741
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 444247440589350573}
+  m_Material: {fileID: 13400000, guid: 176407d7923703c4f8ac892ab2290bac, type: 2}
+  m_IsTrigger: 0
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 27d847f74f913dd43b9a02d3f93b1f23, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  centerOfMass: {x: 0, y: -0.2, z: 0}
-  moveSpeed: 0
-  maxSpeed: 17
-  rotateSpeed: 360
-  virtualCamera: {fileID: 0}
-  drag: 0.95
-  xCoeff: 1
-  yCoeff: 3
-  yIntercept: 25
-  isJump: 0
+  serializedVersion: 2
+  m_Size: {x: 0.5, y: 1.5, z: 0.8}
+  m_Center: {x: 0, y: 0.25, z: 0}
 --- !u!136 &444247440589350745
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -103,7 +137,7 @@ CapsuleCollider:
   m_Radius: 0.2
   m_Height: 1
   m_Direction: 0
-  m_Center: {x: 0, y: -0.3, z: 0.3}
+  m_Center: {x: 0, y: -0.3, z: 0.425}
 --- !u!136 &444247440589350744
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -117,7 +151,7 @@ CapsuleCollider:
   m_Radius: 0.2
   m_Height: 1
   m_Direction: 0
-  m_Center: {x: 0, y: -0.3, z: -0.3}
+  m_Center: {x: 0, y: -0.3, z: -0.425}
 --- !u!136 &444247440589350743
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -129,7 +163,7 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.2
-  m_Height: 1
+  m_Height: 1.25
   m_Direction: 2
   m_Center: {x: 0.3, y: -0.3, z: 0}
 --- !u!136 &444247440589350742
@@ -143,7 +177,7 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.2
-  m_Height: 1
+  m_Height: 1.25
   m_Direction: 2
   m_Center: {x: -0.3, y: -0.3, z: 0}
 --- !u!1001 &444247442519018384
