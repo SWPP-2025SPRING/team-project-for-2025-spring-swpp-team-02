@@ -11,10 +11,12 @@ public class Monkey : ObstacleBase
     private Rigidbody rb;
     private Transform playerTransform;
 
-    private LineRenderer trackLine; // Æ®·¢À» ±×¸° ¶óÀÎ ·»´õ·¯
-    public float pointReachThreshold = 5f; // Á¡¿¡ ¾ó¸¶³ª °¡±î¿öÁö¸é ´ÙÀ½ Á¡À¸·Î ³Ñ¾î°¡´ÂÁö
+    private LineRenderer trackLine; // Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½×¸ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    public float pointReachThreshold = 5f; // ï¿½ï¿½ï¿½ï¿½ ï¿½ó¸¶³ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ñ¾î°¡ï¿½ï¿½ï¿½ï¿½
     private int currentPointIndex = 0;
     private Vector3[] trackPoints;
+
+    private bool isPlayingParticle = false;
 
     protected override void Start()
     {
@@ -28,7 +30,7 @@ public class Monkey : ObstacleBase
         //trackPoints = new Vector3[trackLine.positionCount];
         //trackLine.GetPositions(trackPoints);
 
-        // Æ®·¢ Æ÷ÀÎÆ® ·Îµå
+        // Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ® ï¿½Îµï¿½
         int count = trackLine.positionCount;
         trackPoints = new Vector3[count];
         for (int i = 0; i < count; i++)
@@ -36,7 +38,7 @@ public class Monkey : ObstacleBase
             trackPoints[i] = trackLine.GetPosition(i);
         }
 
-        // ¿ø¼þÀÌ¿Í °¡Àå °¡±î¿î Æ÷ÀÎÆ® ÀÎµ¦½º Ã£±â
+        // ï¿½ï¿½ï¿½ï¿½ï¿½Ì¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ® ï¿½Îµï¿½ï¿½ï¿½ Ã£ï¿½ï¿½
         float minDist = float.MaxValue;
         int closestIndex = 0;
         for (int i = 0; i < trackPoints.Length; i++)
@@ -56,12 +58,12 @@ public class Monkey : ObstacleBase
             Vector3 toMonkey = transform.position - a;
             Vector3 segment = b - a;
 
-            // Åõ¿µ ±æÀÌ·Î ÆÇ´Ü: ¿ø¼þÀÌ°¡ a-b ±¸°£ÀÇ ¼±ºÐ »çÀÌ¿¡ ÀÖ´Â °æ¿ì
+            // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ì·ï¿½ ï¿½Ç´ï¿½: ï¿½ï¿½ï¿½ï¿½ï¿½Ì°ï¿½ a-b ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ì¿ï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½
             float dot = Vector3.Dot(toMonkey, segment.normalized);
 
             if (dot > 0)
             {
-                // ÇöÀç À§Ä¡°¡ a-b »çÀÌ¿¡ ÀÖÀ½ ¡æ ´ÙÀ½ Æ÷ÀÎÆ® ¼±ÅÃ
+                // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ a-b ï¿½ï¿½ï¿½Ì¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½
                 closestIndex += 1;
             }
         }
@@ -78,7 +80,7 @@ public class Monkey : ObstacleBase
 
     protected override void Move()
     {
-        // ÇÃ·¹ÀÌ¾î ¹Ý´ë¹æÇâÀ¸·Î °¡´Â ¹öÀü
+        // ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ ï¿½Ý´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         //if (hasLanded && playerTransform != null)
         //{
         //    float distance = Vector3.Distance(transform.position, playerTransform.position);
@@ -120,7 +122,7 @@ public class Monkey : ObstacleBase
 
         if (distanceToPlayer > 100f || distanceToTargetPlayer < distanceToTarget - 5f)
         {
-            // ÇÃ·¹ÀÌ¾î¿ÍÀÇ °Å¸®°¡ ¸Ö °æ¿ì or ÇÃ·¹ÀÌ¾î µÚ¿¡ ÀÖÀ» °æ¿ì ºñÈ°¼ºÈ­
+            // ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ï¿½ï¿½ï¿½ ï¿½Å¸ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ or ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ ï¿½Ú¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½È°ï¿½ï¿½È­
             Debug.Log("monkey off");
             Off();
             return;
@@ -137,7 +139,7 @@ public class Monkey : ObstacleBase
             }
             else
             {
-                // ¸¶Áö¸· Æ÷ÀÎÆ® µµ´Þ ½Ã Á¤Áö ¶Ç´Â ºñÈ°¼ºÈ­
+                // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ç´ï¿½ ï¿½ï¿½È°ï¿½ï¿½È­
                 Off();
                 return;
             }
@@ -164,6 +166,15 @@ public class Monkey : ObstacleBase
         {
             Vector3 hitDirection = (transform.position - collision.transform.position).normalized;
             rb.AddForce((hitDirection + Vector3.up) * flyForce, ForceMode.Impulse);
+
+            if (!isPlayingParticle)
+            {
+                ParticleSystem particle = ParticleManager.instance.GetParticle("MonkeyCollision");
+                particle.transform.position = collision.contacts[0].point + new Vector3(0, 0.3f, 0);
+                particle.transform.rotation = Quaternion.LookRotation(collision.contacts[0].normal);
+                particle.Play();
+                isPlayingParticle = true;
+            }
 
             Invoke(nameof(Off), 1f);
         }
