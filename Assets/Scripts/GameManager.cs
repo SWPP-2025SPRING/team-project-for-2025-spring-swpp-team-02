@@ -126,29 +126,25 @@ public class GameManager : MonoBehaviour
 
         if (mapNum == 1)
         {
-            for (int i = 0; i < 10; i++)
-            {
-                if (ranking.Map1[i].time > time)
-                {
-                    ranking.Map1.Insert(i, record); // time 순서대로 list에 추가
-                    ranking.Map1.RemoveAt(10); // 마지막 값 제거 (ranking은 10개만 저장)
-                    return;
-                }
-            }
+            InsertRecord(ranking.Map1, record);
         }
         else if (mapNum == 2)
         {
-            for (int i = 0; i < 10; i++)
+            InsertRecord(ranking.Map2, record);
+        }
+    }
+
+    private void InsertRecord(List<Record> records, Record record)
+    {
+        for (int i = 0; i < 10; i++)
+        {
+            if (records[i].time > record.time)
             {
-                if (ranking.Map2[i].time > time)
-                {
-                    ranking.Map2.Insert(i, record); // time 순서대로 list에 추가
-                    ranking.Map2.RemoveAt(10); // 마지막 값 제거 (ranking은 10개만 저장)
-                    return;
-                }
+                records.Insert(i, record); // time 순서대로 list에 추가
+                records.RemoveAt(10); // 마지막 값 제거 (ranking은 10개만 저장)
+                return;
             }
         }
-        
     }
 
     // json으로 랭킹 저장
