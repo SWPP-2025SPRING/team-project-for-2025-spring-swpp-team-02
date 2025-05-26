@@ -6,7 +6,7 @@ public class PlayerUseItem : MonoBehaviour
 {
     public int itemCount = 0;
     public bool isBoosting = false;
-    [SerializeField] private List<GameObject> itemUI;
+    [SerializeField] private List<GameObject> itemUI = new List<GameObject>();
     ParticleSystem particle;
 
     void Update()
