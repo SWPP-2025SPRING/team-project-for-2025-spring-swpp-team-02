@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 444247440589350737}
   - component: {fileID: 2078871243667528508}
   - component: {fileID: 444247440589350740}
+  - component: {fileID: 1490184687973807735}
   - component: {fileID: 469998019989973565}
   - component: {fileID: 444247440589350739}
   - component: {fileID: 444247440589350741}
@@ -82,6 +83,19 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
+--- !u!114 &1490184687973807735
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 444247440589350573}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 641248b6e3e87b246bc370f2f6139d91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mixingCamera: {fileID: 0}
 --- !u!114 &469998019989973565
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -199,11 +213,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 695f06e6db1631d40ab8ea8a021fc065, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 1.1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 695f06e6db1631d40ab8ea8a021fc065, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -0.3
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 695f06e6db1631d40ab8ea8a021fc065, type: 3}
       propertyPath: m_LocalRotation.w
