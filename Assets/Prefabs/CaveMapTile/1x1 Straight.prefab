@@ -247,7 +247,7 @@ GameObject:
   - component: {fileID: 1788099077702158763}
   m_Layer: 0
   m_Name: LeftWallCollider
-  m_TagString: Wall
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -361,7 +361,7 @@ GameObject:
   - component: {fileID: 6641786866854001256}
   m_Layer: 0
   m_Name: RightWallCollider
-  m_TagString: Wall
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1811,10 +1811,6 @@ PrefabInstance:
     - target: {fileID: 916917378494744782, guid: 98f5378049f9b5745a77677f581b32b1, type: 3}
       propertyPath: m_Name
       value: Ground
-      objectReference: {fileID: 0}
-    - target: {fileID: 916917378494744782, guid: 98f5378049f9b5745a77677f581b32b1, type: 3}
-      propertyPath: m_Layer
-      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 1563464522814601850, guid: 98f5378049f9b5745a77677f581b32b1, type: 3}
       propertyPath: m_Enabled

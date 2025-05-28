@@ -45,7 +45,7 @@ GameObject:
   - component: {fileID: 5313074470811991113}
   m_Layer: 0
   m_Name: RightWallCollider
-  m_TagString: Wall
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -129,7 +129,7 @@ GameObject:
   - component: {fileID: 61630907487731380}
   m_Layer: 0
   m_Name: LeftWallCollider
-  m_TagString: Wall
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

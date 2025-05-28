@@ -918,22 +918,6 @@ PrefabInstance:
       propertyPath: itemUI.Array.data[2]
       value: 
       objectReference: {fileID: 1618759972486530034}
-    - target: {fileID: 1490184687973807735, guid: af94f4ad3c81efa48be9acc4062684d7, type: 3}
-      propertyPath: sectorName.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 1490184687973807735, guid: af94f4ad3c81efa48be9acc4062684d7, type: 3}
-      propertyPath: sectorName.Array.data[0]
-      value: TrackSector1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1490184687973807735, guid: af94f4ad3c81efa48be9acc4062684d7, type: 3}
-      propertyPath: sectorName.Array.data[1]
-      value: RoomSector
-      objectReference: {fileID: 0}
-    - target: {fileID: 1490184687973807735, guid: af94f4ad3c81efa48be9acc4062684d7, type: 3}
-      propertyPath: sectorName.Array.data[2]
-      value: TrackSector2
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: af94f4ad3c81efa48be9acc4062684d7, type: 3}
 --- !u!4 &3028419032764210384 stripped

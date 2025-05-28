@@ -6,21 +6,32 @@ using Cinemachine;
 public class CameraChange : MonoBehaviour
 {
     [SerializeField] CinemachineMixingCamera mixingCamera;
-    [SerializeField] List<string> sectorName;
     int currentCamera = 0;
     void OnTriggerEnter(Collider other)
     {
-        for (int i = 0; i < sectorName.Count; i++)
+        if (other.name == "RoomSector" && currentCamera != 1)
         {
-            if (other.name == sectorName[i] && currentCamera != i)
-            {
-                CameraInit();
-                StopAllCoroutines();
-                StartCoroutine(LerpCamera(currentCamera, i));
+            CameraInit();
+            StopAllCoroutines();
+            StartCoroutine(LerpCamera(currentCamera, 1));
 
-                currentCamera = i;
-                break;
-            }
+            currentCamera = 1;
+        }
+        else if (other.name == "TrackSector1" && currentCamera != 0)
+        {
+            CameraInit();
+            StopAllCoroutines();
+            StartCoroutine(LerpCamera(currentCamera, 0));
+
+            currentCamera = 0;
+        }
+        else if (other.name == "TrackSector2" && currentCamera != 2)
+        {
+            CameraInit();
+            StopAllCoroutines();
+            StartCoroutine(LerpCamera(currentCamera, 2));
+
+            currentCamera = 2;
         }
     }
 

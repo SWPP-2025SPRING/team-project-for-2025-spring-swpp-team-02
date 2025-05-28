@@ -370,7 +370,7 @@ GameObject:
   - component: {fileID: 5877869941116661095}
   m_Layer: 0
   m_Name: CornerWallCollider
-  m_TagString: Wall
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -415,7 +415,7 @@ GameObject:
   - component: {fileID: 5877869940308686480}
   m_Layer: 0
   m_Name: CornerWallCollider
-  m_TagString: Wall
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -507,7 +507,7 @@ GameObject:
   - component: {fileID: 6955629453504432210}
   m_Layer: 0
   m_Name: CornerWallCollider
-  m_TagString: Wall
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -552,7 +552,7 @@ GameObject:
   - component: {fileID: 6955629453235950501}
   m_Layer: 0
   m_Name: CornerWallCollider
-  m_TagString: Wall
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
