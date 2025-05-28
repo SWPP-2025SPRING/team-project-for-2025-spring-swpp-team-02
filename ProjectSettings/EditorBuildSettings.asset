@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/ForestMap.unity
     guid: a2414fa6caf6a6c459bb387c45f36040
+  - enabled: 1
+    path: Assets/Scenes/CaveMap.unity
+    guid: 34d1e4f17795bf84dbab3561b09b867b
   m_configObjects: {}
