@@ -1,0 +1,21 @@
+{
+    "name": "TestMain",
+    "rootNamespace": "",
+    "references": [
+        "Unity.TextMeshPro",
+        "Unity.TextMeshPro.Editor",
+        "Cinemachine.Editor.Tests",
+        "Cinemachine.Runtime.Tests",
+        "Cinemachine",
+        "com.unity.cinemachine.editor"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

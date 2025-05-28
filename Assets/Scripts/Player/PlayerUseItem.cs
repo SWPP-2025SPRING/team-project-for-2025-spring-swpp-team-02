@@ -6,18 +6,45 @@ public class PlayerUseItem : MonoBehaviour
 {
     public int itemCount = 0;
     public bool isBoosting = false;
-
+    [SerializeField] private List<GameObject> itemUI = new List<GameObject>();
     ParticleSystem particle;
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && itemCount > 0 && !isBoosting)
         {
-            particle = ParticleManager.instance.GetParticle("UseItem");
-            particle.Play();
+            UseItem();
         }
 
-        particle.transform.position = transform.position - new Vector3(0, 0.2f, 0);
+        if (particle != null)
+        {
+            particle.transform.position = transform.position - new Vector3(0, 0.2f, 0);
+        }
+    }
+
+    public void GetItem()
+    {
+        itemCount++;
+
+        ChangeItemUI();
+    }
+
+    void UseItem()
+    {
+        itemCount--;
+        particle = ParticleManager.instance.GetParticle("UseItem");
+        StartCoroutine(Boost());
+        particle.Play();
+
+        ChangeItemUI();
+    }
+
+    void ChangeItemUI()
+    {
+        for (int i = 0; i < itemUI.Count; i++)
+        {
+            itemUI[i].SetActive(i < itemCount); // item의 개수만큼 활성화
+        }
     }
 
     IEnumerator Boost()
