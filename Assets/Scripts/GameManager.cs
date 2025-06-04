@@ -38,7 +38,7 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
 
     [SerializeField]
-    private string serverIp = "192.168.245.36"; // '서버로 쓸 노트북'의 IP 로 변경 필요
+    private string serverIp = "10.150.196.21"; // '서버로 쓸 노트북'의 IP 로 변경 필요
 
     public bool isRun;
     public float runTime;
