@@ -9,7 +9,7 @@ public class LoadingText : MonoBehaviour
     [SerializeField]
     private float interval = 0.5f;       
 
-    private string baseText = "·Î µù Áß";
+    private string baseText = "ë¡œë”©ì¤‘";
     private int dotCount = 0;
 
     void Start()
@@ -22,12 +22,12 @@ public class LoadingText : MonoBehaviour
     {
         while (true)
         {
-            // Á¡ °³¼ö¿¡ µû¶ó ¹®ÀÚ¿­ ±¸¼º
-            string dots = new string('.', dotCount).Replace(".", " ."); // °ø¹é Æ÷ÇÔ
+            // ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ú¿ï¿½ ï¿½ï¿½ï¿½ï¿½
+            string dots = new string('.', dotCount).Replace(".", " ."); // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
             loadingText.text = baseText + dots;
 
-            // ´ÙÀ½ ÇÁ·¹ÀÓ ÁØºñ
-            dotCount = (dotCount + 1) % 4;  // 0 ~ 3 ¹Ýº¹
+            // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Øºï¿½
+            dotCount = (dotCount + 1) % 4;  // 0 ~ 3 ï¿½Ýºï¿½
             yield return new WaitForSeconds(interval);
         }
     }

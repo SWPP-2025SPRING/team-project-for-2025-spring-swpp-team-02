@@ -32,7 +32,7 @@ public class PlayerCollision : MonoBehaviour
     // 클리어 구간에 진입
     void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Goal"))
+        if (other.CompareTag("Goal") && GameManager.instance.isRun)
         {
             if (ParticleManager.instance != null)
             {
@@ -49,6 +49,9 @@ public class PlayerCollision : MonoBehaviour
 
             GameManager.instance.AddRecord(playerName, recordTime, currentMap);
             Debug.Log("[PlayerCollision] recordTime = " + GameManager.instance.runTime);
+
+            GameManager.instance.isRun = false;
+            gameObject.GetComponent<PlayerUI>().PlayEndUI();
         }
     }
 

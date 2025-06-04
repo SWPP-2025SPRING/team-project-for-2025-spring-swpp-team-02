@@ -6,7 +6,7 @@ public class PlayerUseItem : MonoBehaviour
 {
     public int itemCount = 0;
     public bool isBoosting = false;
-    [SerializeField] private List<GameObject> itemUI = new List<GameObject>();
+    public List<GameObject> itemUI = new List<GameObject>();
     ParticleSystem particle;
 
     void Update()
@@ -26,17 +26,28 @@ public class PlayerUseItem : MonoBehaviour
     {
         itemCount++;
 
+        if (itemCount > itemUI.Count)
+        {
+            itemCount = itemUI.Count;
+        }
+
         ChangeItemUI();
     }
 
-    void UseItem()
+    public void UseItem()
     {
-        itemCount--;
-        particle = ParticleManager.instance.GetParticle("UseItem");
-        StartCoroutine(Boost());
-        particle.Play();
+        if (itemCount > 0)
+        {
+            itemCount--;
+            particle = ParticleManager.instance.GetParticle("UseItem");
+            StartCoroutine(Boost());
+            if (particle != null)
+            {
+                particle.Play();
+            }
 
-        ChangeItemUI();
+            ChangeItemUI();
+        }
     }
 
     void ChangeItemUI()
