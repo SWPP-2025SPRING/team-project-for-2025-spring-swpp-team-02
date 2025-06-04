@@ -1,9 +1,10 @@
+using System;
+using System.IO;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System.IO;
 using UnityEngine.SceneManagement;
-using System;
-using Unity.VisualScripting;
+using UnityEngine.Networking;
 
 // 저장할 구조체, 클래스
 [Serializable]
@@ -26,12 +27,22 @@ public class Ranking
     public List<Record> Map2 = new List<Record>();
 }
 
+[Serializable]
+public class RecordListWrapper
+{
+    public List<Record> records;
+}
+
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
+    [SerializeField]
+    private string serverIp = "10.150.196.21"; // '서버로 쓸 노트북'의 IP 로 변경 필요
+
     public bool isRun;
     public float runTime;
+    private bool hasSubmitted = false; // 기록 전송 여부
 
     public Ranking ranking;
 
@@ -50,59 +61,19 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        InitRanking();
-    }
-
-    // 랭킹 초기화
-    void InitRanking()
-    {
-        FileInfo fi = new FileInfo(Path.Combine(Application.persistentDataPath, "Record.json"));
-        if (fi.Exists)
-        {
-            LoadRecord();
-        }
-        else
-        {
-            ranking = new Ranking();
-            for (int i = 0; i < 10; i++)
-            {
-                ranking.Map1.Add(new Record(null, float.PositiveInfinity));
-                ranking.Map2.Add(new Record(null, float.PositiveInfinity));
-            }
-        }
-
-        // 테스트 데이터
-        /*
-        AddRecord("a", 10, 1);
-        AddRecord("b", 9, 1);
-        AddRecord("c", 11, 1);
-        AddRecord("d", 15, 1);
-        AddRecord("e", 14, 1);
-        AddRecord("f", 12, 1);
-        AddRecord("g", 19, 1);
-        AddRecord("h", 10, 1);
-        AddRecord("i", 9, 1);
-        AddRecord("j", 20, 1);
-        AddRecord("k", 21, 1);
-        AddRecord("l", 11, 1);
-
-        AddRecord("a", 6, 2);
-        AddRecord("b", 9, 2);
-        AddRecord("c", 6, 2);
-        AddRecord("d", 7, 2);
-        */
-        /*
-        AddRecord("e", 5, 2);
-        AddRecord("f", 8, 2);
-        */
-        SaveRecord();
-        
+        StartCoroutine(FetchRankingFromServer(1));
+        StartCoroutine(FetchRankingFromServer(2));
     }
 
     public void MoveScene(string sceneName)
     {
-        // Ʈ������ ȿ��
+        // 씬 변환
         SceneManager.LoadScene(sceneName);
+
+        // 씬이 바뀔 때마다 기록 전송/타이머 리셋
+        hasSubmitted = false;
+        isRun = false;
+        runTime = 0;
     }
 
     void Update()
@@ -117,49 +88,61 @@ public class GameManager : MonoBehaviour
     {
         runTime = 0;
         isRun = true;
+        Debug.Log("[GameManager] StartRun() 호출됨 → runTime 누적 시작");
     }
 
     // 저장시 정렬해서 저장
     public void AddRecord(string name, float time, int mapNum)
-    {
-        Record record = new Record(name, time);
+    {   
+        if (hasSubmitted) return; // 이미 전송했으면 그냥 리턴
+        hasSubmitted = true;      // 최초 1회 전송
 
-        if (mapNum == 1)
+        StartCoroutine(SubmitRecordToServer(name, time, mapNum));
+    }
+
+    // 서버로 기록 전송
+    IEnumerator SubmitRecordToServer(string name, float time, int mapNum)
+    {
+        string json = $"{{\"name\":\"{name}\",\"time\":{time},\"map\":{mapNum}}}";
+        Debug.Log($"[Submit] Sending: {json}");
+
+        UnityWebRequest request = new UnityWebRequest($"http://{serverIp}:8080/submit", "POST");
+        byte[] bodyRaw = System.Text.Encoding.UTF8.GetBytes(json);
+        request.uploadHandler = new UploadHandlerRaw(bodyRaw);
+        request.downloadHandler = new DownloadHandlerBuffer();
+        request.SetRequestHeader("Content-Type", "application/json");
+
+        yield return request.SendWebRequest();
+
+        if (request.result != UnityWebRequest.Result.Success)
         {
-            InsertRecord(ranking.Map1, record);
+            Debug.LogError("Submit failed: " + request.error);
         }
-        else if (mapNum == 2)
+        else
         {
-            InsertRecord(ranking.Map2, record);
+            Debug.Log("[Submit] Success");
         }
     }
 
-    private void InsertRecord(List<Record> records, Record record)
+    // 서버에서 랭킹 불러오기
+    IEnumerator FetchRankingFromServer(int mapNum)
     {
-        for (int i = 0; i < 10; i++)
+        UnityWebRequest request = UnityWebRequest.Get($"http://{serverIp}:8080/ranking/{mapNum}");
+        yield return request.SendWebRequest();
+
+        if (request.result == UnityWebRequest.Result.Success)
         {
-            if (records[i].time > record.time)
-            {
-                records.Insert(i, record); // time 순서대로 list에 추가
-                records.RemoveAt(10); // 마지막 값 제거 (ranking은 10개만 저장)
-                return;
-            }
+            string rawJson = "{\"records\":" + request.downloadHandler.text + "}";
+            RecordListWrapper wrapper = JsonUtility.FromJson<RecordListWrapper>(rawJson);
+
+            if (mapNum == 1)
+                ranking.Map1 = wrapper.records;
+            else
+                ranking.Map2 = wrapper.records;
         }
-    }
-
-    // json으로 랭킹 저장
-    private void SaveRecord()
-    {
-        string jsonData = JsonUtility.ToJson(ranking, true);
-
-        File.WriteAllText(Path.Combine(Application.persistentDataPath, "Record.json"), jsonData);
-        Debug.Log("Save");
-    }
-
-    private void LoadRecord()
-    {
-        string load = File.ReadAllText(Path.Combine(Application.persistentDataPath, "Record.json"));
-
-        ranking = JsonUtility.FromJson<Ranking>(load);
+        else
+        {
+            Debug.LogError("Fetch failed: " + request.error);
+        }
     }
 }

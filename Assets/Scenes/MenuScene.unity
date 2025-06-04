@@ -3598,6 +3598,60 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 860023885}
   m_CullTransparentMesh: 1
+--- !u!1 &910095375
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 910095377}
+  - component: {fileID: 910095376}
+  m_Layer: 0
+  m_Name: LobbyUIController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &910095376
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 910095375}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef8a50cb7f178ed40816fc8ad9d845b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serverIp: 192.168.245.36
+  port: 8080
+  caveClickable: {fileID: 214649039}
+  forestClickable: {fileID: 945234222}
+  caveRankingPanel: {fileID: 1624357008}
+  forestRankingPanel: {fileID: 1342359821}
+  caveContextText: {fileID: 1767851693}
+  forestContextText: {fileID: 1325238652}
+  caveReturnButton: {fileID: 1534870077}
+  forestReturnButton: {fileID: 282293460}
+--- !u!4 &910095377
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 910095375}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 64.0299, y: -10.667677, z: 15.611804}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &944652480
 GameObject:
   m_ObjectHideFlags: 0
@@ -5771,7 +5825,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1342359821
 GameObject:
@@ -6448,7 +6502,7 @@ RectTransform:
   - {fileID: 1245661639}
   - {fileID: 642105997}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -7805,6 +7859,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97afe5d2c47487b4daf45e9638559183, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  serverIp: 192.168.245.36
+  isRun: 0
+  runTime: 0
+  ranking:
+    Map1: []
+    Map2: []
 --- !u!4 &1952219559
 Transform:
   m_ObjectHideFlags: 0
@@ -7818,7 +7878,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1974412190
 GameObject:

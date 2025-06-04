@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody myRigidbody;
     private KeyCode previousInput = KeyCode.None;
     private float adSpeed = 0;
+    private bool hasMoved = false;
 
     [Header("AD")]
 
@@ -151,6 +152,14 @@ public class PlayerController : MonoBehaviour
     {
         if (!isJump)
         {
+            // 최초 이동 감지
+            if (!hasMoved && playerMoveDirection.magnitude > 0.1f)
+            {
+                hasMoved = true;
+                Debug.Log("[PlayerController] 최초 이동 감지됨 → StartRun() 호출");
+                GameManager.instance.StartRun();
+            }
+
             Vector3 groundNormal; // 현재 위치의 바닥 normal 확인
             if (Physics.Raycast(transform.position, -transform.up, out RaycastHit hit, 1f, groundLayer))
             {
