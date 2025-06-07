@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Networking;
+using UnityEngine.UI;
 
 // 저장할 구조체, 클래스
 [Serializable]
@@ -37,14 +38,14 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
-    [SerializeField]
-    private string serverIp = "10.150.196.21"; // '서버로 쓸 노트북'의 IP 로 변경 필요
+    public string serverIp = "10.150.196.21"; // '서버로 쓸 노트북'의 IP 로 변경 필요
 
     public bool isRun;
     public float runTime;
     private bool hasSubmitted = false; // 기록 전송 여부
 
     public Ranking ranking;
+    public bool firstGame = true;
 
     private void Awake()
     {
@@ -67,15 +68,10 @@ public class GameManager : MonoBehaviour
 
     public void MoveScene(string sceneName)
     {
-        // 씬 변환
-        SceneManager.LoadScene(sceneName);
-
-        // 씬이 바뀔 때마다 기록 전송/타이머 리셋
         hasSubmitted = false;
-        isRun = false;
         runTime = 0;
     }
-
+    
     void Update()
     {
         if (isRun)

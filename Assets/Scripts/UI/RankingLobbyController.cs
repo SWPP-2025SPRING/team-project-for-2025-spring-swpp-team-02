@@ -19,7 +19,7 @@ public class RankingLobbyController : MonoBehaviour
 {
     [Header("서버 설정")]
     [Tooltip("예: \"192.168.245.36\" (로컬 Flask 서버 IP)")]
-    public string serverIp = "192.168.245.36";
+    public string serverIp;
     public int port = 8080;
 
     [Header("UI 레퍼런스 (버튼 컴포넌트 없이도 클릭 가능)")]
@@ -66,6 +66,11 @@ public class RankingLobbyController : MonoBehaviour
         // 시작할 때 두 패널 모두 비활성화
         caveRankingPanel.SetActive(false);
         forestRankingPanel.SetActive(false);
+    }
+
+    void Start()
+    {
+        serverIp = GameManager.instance.serverIp;
     }
 
     /// <summary>

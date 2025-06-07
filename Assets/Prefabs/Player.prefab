@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 444247440589350740}
   - component: {fileID: 1490184687973807735}
   - component: {fileID: 469998019989973565}
+  - component: {fileID: 2767117854600257240}
   - component: {fileID: 444247440589350739}
   - component: {fileID: 444247440589350741}
   - component: {fileID: 444247440589350745}
@@ -70,15 +71,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   centerOfMass: {x: 0, y: -0.2, z: 0}
   virtualCamera: {fileID: 0}
-  moveSpeed: 0
+  moveSpeed: 20
   maxSpeed: 17
   maxUpSpeed: 23
   maxDownSpeed: 27
   rotateSpeed: 360
-  drag: 0.95
-  xCoeff: 1
-  yCoeff: 3
-  yIntercept: 25
   isJump: 0
   groundLayer:
     serializedVersion: 2
@@ -112,6 +109,19 @@ MonoBehaviour:
   itemCount: 0
   isBoosting: 0
   itemUI: []
+--- !u!114 &2767117854600257240
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 444247440589350573}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f852299746fbc064782fdd3aae5b5a61, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeUI: {fileID: 0}
 --- !u!54 &444247440589350739
 Rigidbody:
   m_ObjectHideFlags: 0

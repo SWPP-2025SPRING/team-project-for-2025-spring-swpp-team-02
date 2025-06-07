@@ -10,6 +10,13 @@ public struct ParticleObject
     public string name;
     public ParticleSystem particle;
     public int count;
+
+    void ParticleManager(string _name, ParticleSystem _particle, int _count)
+    {
+        name = _name;
+        particle = _particle;
+        count = _count;
+    }
 }
 
 public class ParticleManager : MonoBehaviour

@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour
     public GameObject virtualCamera;
 
     [Header("Move")]
-    public float moveSpeed = 30;
+    public float moveSpeed = 20;
     public float maxSpeed = 25;
     public float maxUpSpeed = 23, maxDownSpeed = 27;
     public float rotateSpeed = 360;
@@ -16,19 +16,12 @@ public class PlayerController : MonoBehaviour
     private Rigidbody myRigidbody;
     private KeyCode previousInput = KeyCode.None;
     private float adSpeed = 0;
-    private bool hasMoved = false;
-
-    [Header("AD")]
-
-    [SerializeField] private float drag = 0.99f;
-    [SerializeField] private float xCoeff = 1;
-    [SerializeField] private float yCoeff = 10;
-    [SerializeField] private float yIntercept = 13;
+    private float drag = 0.9f;
 
     private bool isParticleDelay = false;
 
     [Header("jump")]
-    [SerializeField] private bool isJump = false;
+    public bool isJump = false;
     private Coroutine jumpCoroutine;
     [SerializeField] private LayerMask groundLayer;
 
@@ -49,8 +42,11 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        Move();
-        Rotate();
+        if (GameManager.instance.isRun)
+        {
+            Move();
+            Rotate();
+        }
     }
 
     private void JumpCheck()
@@ -67,7 +63,6 @@ public class PlayerController : MonoBehaviour
         {
             jumpCoroutine = StartCoroutine(JumpCheckCoroutine());
         }
-
     }
 
     IEnumerator JumpCheckCoroutine()
@@ -91,7 +86,7 @@ public class PlayerController : MonoBehaviour
         }
 
         adSpeed *= drag;
-        moveSpeed = yIntercept + Mathf.Sqrt(xCoeff * adSpeed) * yCoeff;
+        //moveSpeed = yIntercept + Mathf.Sqrt(xCoeff * adSpeed) * yCoeff;
     }
 
     private void playerMoveInput()
@@ -152,14 +147,6 @@ public class PlayerController : MonoBehaviour
     {
         if (!isJump)
         {
-            // 최초 이동 감지
-            if (!hasMoved && playerMoveDirection.magnitude > 0.1f)
-            {
-                hasMoved = true;
-                Debug.Log("[PlayerController] 최초 이동 감지됨 → StartRun() 호출");
-                GameManager.instance.StartRun();
-            }
-
             Vector3 groundNormal; // 현재 위치의 바닥 normal 확인
             if (Physics.Raycast(transform.position, -transform.up, out RaycastHit hit, 1f, groundLayer))
             {

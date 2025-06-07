@@ -23,22 +23,22 @@ public class BoingWhenEnabled : MonoBehaviour
 
     private void OnEnable()
     {
-        // ¿ÜºÎ¿¡¼­ SetActive(true) µÇ¾úÀ» °æ¿ì, »óÅÂ Ã¼Å©
+        // ï¿½ÜºÎ¿ï¿½ï¿½ï¿½ SetActive(true) ï¿½Ç¾ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ Ã¼Å©
         if (currentState == UIState.Hiding)
         {
-            // ²¨Áö´Â ÁßÀÌ¾ú´Ù¸é Áß´ÜÇÏ°í ´Ù½Ã ÄÑ±â
+            // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ì¾ï¿½ï¿½Ù¸ï¿½ ï¿½ß´ï¿½ï¿½Ï°ï¿½ ï¿½Ù½ï¿½ ï¿½Ñ±ï¿½
             currentSequence?.Kill();
         }
 
         if (currentState == UIState.Shown || currentState == UIState.Showing)
         {
-            return; // ÀÌ¹Ì ÄÑÁ®ÀÖ´Ù¸é ¹«½Ã
+            return; // ï¿½Ì¹ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ö´Ù¸ï¿½ ï¿½ï¿½ï¿½ï¿½
         }
 
         StartShow();
     }
 
-    [ContextMenu("¼û±â±â Å×½ºÆ®")]
+    [ContextMenu("ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½×½ï¿½Æ®")]
     public void Hide()
     {
         if (currentState == UIState.Hidden || currentState == UIState.Hiding)
@@ -55,7 +55,7 @@ public class BoingWhenEnabled : MonoBehaviour
         transform.localScale = originalScale * 0.5f;
 
         currentSequence = DOTween.Sequence()
-            .SetUpdate(UpdateType.Late, true)  // LateUpdate¿¡ ¸ÂÃç¼­ ½ÇÇà, unscaled timeÀ¸·Îµµ °¡´É
+            .SetUpdate(UpdateType.Late, true)  // LateUpdateï¿½ï¿½ ï¿½ï¿½ï¿½ç¼­ ï¿½ï¿½ï¿½ï¿½, unscaled timeï¿½ï¿½ï¿½Îµï¿½ ï¿½ï¿½ï¿½ï¿½
             .Append(transform.DOScale(originalScale * scaleAmount, duration).SetEase(easeType))
             .Append(transform.DOScale(originalScale, duration * 0.5f))
             .SetLink(gameObject)
@@ -73,7 +73,7 @@ public class BoingWhenEnabled : MonoBehaviour
 
 
         currentSequence = DOTween.Sequence()
-            .SetUpdate(UpdateType.Late, true)  // LateUpdate¿¡ ¸ÂÃç¼­ ½ÇÇà, unscaled timeÀ¸·Îµµ °¡´É
+            .SetUpdate(UpdateType.Late, true)  // LateUpdateï¿½ï¿½ ï¿½ï¿½ï¿½ç¼­ ï¿½ï¿½ï¿½ï¿½, unscaled timeï¿½ï¿½ï¿½Îµï¿½ ï¿½ï¿½ï¿½ï¿½
             .Append(transform.DOScale(originalScale * 1.2f, duration * 0.5f).SetEase(easeType))
             .Append(transform.DOScale(Vector3.zero, duration * 0.5f))
             .SetLink(gameObject)
@@ -85,9 +85,14 @@ public class BoingWhenEnabled : MonoBehaviour
 
     }
 
+    public void SetHidden()
+    {
+        currentState = UIState.Hidden;
+    }
+
     IEnumerator DisableNextFrame()
     {
-        yield return null; // ´ÙÀ½ ÇÁ·¹ÀÓ±îÁö ´ë±â
+        yield return null; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ó±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
         gameObject.SetActive(false);
     }
 }

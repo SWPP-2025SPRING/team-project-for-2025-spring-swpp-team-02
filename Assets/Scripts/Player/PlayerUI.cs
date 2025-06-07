@@ -1,14 +1,17 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
 
 public class PlayerUI : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI timeUI;
+    public TextMeshProUGUI timeUI;
+    public GameObject RankingUI;
+    [SerializeField] private int mapNumber;
+
     void Start()
     {
-        GameManager.instance.StartRun();
+         
     }
-
     void Update()
     {
         UpdateTimeUI();
@@ -22,5 +25,23 @@ public class PlayerUI : MonoBehaviour
         float other = (int)((time - (int)time) * 100);
 
         timeUI.text = $"{min,2:00} : {sec,2:00} : {other,2:00}";
+    }
+
+    public void PlayEndUI()
+    {
+        StartCoroutine(EndUIAnimation());
+    }
+
+    IEnumerator EndUIAnimation()
+    {
+        yield return new WaitForSeconds(1);
+
+        RankingUI.SetActive(true);
+        GameManager.instance.AddRecord("test", GameManager.instance.runTime, mapNumber);
+    }
+
+    public void BackToLobby()
+    {
+        TransitionEffect.instance.MoveScene("MenuScene");
     }
 }
