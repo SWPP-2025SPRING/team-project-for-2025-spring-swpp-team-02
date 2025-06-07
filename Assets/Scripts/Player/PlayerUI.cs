@@ -15,6 +15,11 @@ public class PlayerUI : MonoBehaviour
     void Update()
     {
         UpdateTimeUI();
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            TransitionEffect.instance.MoveScene("MenuScene");
+        }
     }
 
     void UpdateTimeUI()
