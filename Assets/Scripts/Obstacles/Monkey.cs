@@ -119,7 +119,7 @@ public class Monkey : ObstacleBase
 
         float distanceToPlayer = Vector3.Distance(transform.position, playerTransform.position);
         float distanceToTargetPlayer = (pointVec2 - playerVec2).magnitude;
-
+        
         if (distanceToPlayer > 100f || distanceToTargetPlayer < distanceToTarget - 5f)
         {
             // �÷��̾���� �Ÿ��� �� ��� or �÷��̾� �ڿ� ���� ��� ��Ȱ��ȭ

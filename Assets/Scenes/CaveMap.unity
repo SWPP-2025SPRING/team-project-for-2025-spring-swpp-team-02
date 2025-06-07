@@ -18525,7 +18525,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 644256399}
-  m_LocalRotation: {x: 0.10386893, y: -0.0000000062785177, z: 6.556896e-10, w: 0.994591}
+  m_LocalRotation: {x: 0.10386894, y: -0.000000029641125, z: 0.000000003095536, w: 0.994591}
   m_LocalPosition: {x: -317.98898, y: 57.920044, z: -222.96873}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -28649,7 +28649,7 @@ MonoBehaviour:
   m_LookAt: {fileID: 0}
   m_Follow: {fileID: 1124724006}
   m_Lens:
-    FieldOfView: 80
+    FieldOfView: 100
     OrthographicSize: 5
     NearClipPlane: 0.3
     FarClipPlane: 1000
@@ -39030,7 +39030,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1405780256}
-  m_LocalRotation: {x: 0.08195217, y: 0.88103527, z: 0.16583712, w: -0.43538356}
+  m_LocalRotation: {x: 0.08195217, y: 0.88103527, z: 0.16583712, w: -0.4353835}
   m_LocalPosition: {x: 90.01102, y: -9.079956, z: 93.531265}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -42261,7 +42261,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1486896499}
-  m_LocalRotation: {x: 0.10386893, y: -0.0000000062785177, z: 6.556896e-10, w: 0.994591}
+  m_LocalRotation: {x: 0.10386894, y: -0.000000029641125, z: 0.000000003095536, w: 0.994591}
   m_LocalPosition: {x: 0, y: -1.5, z: -4.5000005}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -51951,7 +51951,7 @@ MonoBehaviour:
   - position: {x: -123, y: 0, z: 35}
     tangent: {x: 0, y: 0, z: 10}
     roll: 0
-  - position: {x: -120, y: 0, z: 67}
+  - position: {x: -121, y: 0, z: 67}
     tangent: {x: 0, y: 0, z: 11}
     roll: 0
   - position: {x: -123, y: 0, z: 99}
@@ -51999,10 +51999,10 @@ MonoBehaviour:
   - position: {x: 55, y: 0, z: -1}
     tangent: {x: 10, y: 0, z: 0}
     roll: 0
-  - position: {x: 85, y: 0, z: -1}
+  - position: {x: 82, y: 0, z: -1}
     tangent: {x: 10, y: 0, z: 0}
     roll: 0
-  - position: {x: 108, y: 0, z: 14}
+  - position: {x: 105, y: 0, z: 17}
     tangent: {x: 7.07, y: 0, z: 7.07}
     roll: 0
   - position: {x: 124.2, y: 0, z: 36.2}
@@ -56553,31 +56553,31 @@ MonoBehaviour:
   - position: {x: 22, y: 0, z: 14}
     tangent: {x: 7, y: 0, z: 7}
     roll: 0
-  - position: {x: 42, y: 0, z: 38}
+  - position: {x: 43, y: 0, z: 36}
     tangent: {x: 7, y: 0, z: 7}
     roll: 0
   - position: {x: 70, y: 0, z: 51}
     tangent: {x: 10, y: 0, z: 0}
     roll: 0
-  - position: {x: 100, y: 0, z: 51}
-    tangent: {x: 10, y: 0, z: 0}
+  - position: {x: 100, y: 0, z: 48}
+    tangent: {x: 8, y: 0, z: -5}
     roll: 0
   - position: {x: 119, y: 0, z: 30}
-    tangent: {x: 5, y: 0, z: -10}
+    tangent: {x: 7, y: 0, z: -7}
     roll: 0
-  - position: {x: 150, y: 0, z: 7}
+  - position: {x: 150, y: 0, z: 10}
     tangent: {x: 20, y: 0, z: 0}
     roll: 0
-  - position: {x: 190, y: 0, z: 7}
+  - position: {x: 190, y: 0, z: 9}
     tangent: {x: 10, y: 0, z: 0}
     roll: 0
-  - position: {x: 215, y: 0, z: 22}
+  - position: {x: 213, y: 0, z: 24}
     tangent: {x: 7, y: 0, z: 7}
     roll: 0
-  - position: {x: 241, y: 0, z: 48}
+  - position: {x: 239, y: 0, z: 50}
     tangent: {x: 8, y: 0, z: 8}
     roll: 0
-  - position: {x: 257, y: 0, z: 75}
+  - position: {x: 255, y: 0, z: 75}
     tangent: {x: 0, y: 0, z: 10}
     roll: 0
   - position: {x: 254, y: 0, z: 105}
@@ -58368,6 +58368,7 @@ MonoBehaviour:
   serverIp: 10.150.196.21
   isRun: 0
   runTime: 0
+  hasSubmitted: 0
   ranking:
     Map1: []
     Map2: []
@@ -58749,7 +58750,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 1
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
   m_SortingOrder: 1
   m_TargetDisplay: 0

@@ -9,9 +9,11 @@ public class MenuScene : MonoBehaviour
     public GameObject optionPanel;
     public GameObject lobbyPanel;
     public GameObject manualPanel;
-    public GameObject[] manualArray;
+    public List<GameObject> manualArray;
     public GameObject gameEndPanel;
     public TextMeshProUGUI fullScreenButtonText;
+    public GameObject caveRanking;
+    public GameObject forestRanking;
     private int manualNumber = 0;
 
     void Start()
@@ -29,7 +31,7 @@ public class MenuScene : MonoBehaviour
 
     public void ManualInit()
     {
-        for (int i = 0; i < manualArray.Length; i++)
+        for (int i = 0; i < manualArray.Count; i++)
         {
             if (i == manualNumber)
             {
@@ -52,7 +54,7 @@ public class MenuScene : MonoBehaviour
             manualPanel.GetComponent<BoingWhenEnabled>().Hide();
             manualNumber = 0;
         }
-        else if (manualNumber >= manualArray.Length)
+        else if (manualNumber >= manualArray.Count)
         {
             lobbyPanel.SetActive(true);
             manualPanel.GetComponent<BoingWhenEnabled>().Hide();
@@ -75,9 +77,36 @@ public class MenuScene : MonoBehaviour
         }
     }
 
+    private void OnOffObject(GameObject obj)
+    {
+        if (obj.activeSelf)
+        {
+            obj.GetComponent<BoingWhenEnabled>().Hide();
+        }
+        else
+        {
+            obj.SetActive(true);
+        }
+    }
+
+    public void ForestRanking()
+    {
+        OnOffObject(forestRanking);
+    }
+
+    public void CaveRanking()
+    {
+        OnOffObject(caveRanking);
+    }
+
+    public void Close()
+    {
+        lobbyPanel.SetActive(false);
+    }
+
     public void OptionButton()
     {
-        optionPanel.SetActive(true);
+        OnOffObject(optionPanel);
     }
 
     public void EndButton()

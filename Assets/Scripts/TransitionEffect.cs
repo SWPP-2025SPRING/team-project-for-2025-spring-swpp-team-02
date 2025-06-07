@@ -39,6 +39,9 @@ public class TransitionEffect : MonoBehaviour
 
     public void MoveScene(string sceneName)
     {
+        GameManager.instance.hasSubmitted = false;
+        GameManager.instance.runTime = 0;
+        GameManager.instance.isRun = false;
         StartCoroutine(SceneTransitionStart(sceneName));
     }
 

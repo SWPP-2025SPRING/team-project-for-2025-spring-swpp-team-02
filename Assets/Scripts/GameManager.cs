@@ -42,7 +42,7 @@ public class GameManager : MonoBehaviour
 
     public bool isRun;
     public float runTime;
-    private bool hasSubmitted = false; // 기록 전송 여부
+    public bool hasSubmitted = false; // 기록 전송 여부
 
     public Ranking ranking;
     public bool firstGame = true;
@@ -64,12 +64,6 @@ public class GameManager : MonoBehaviour
     {
         StartCoroutine(FetchRankingFromServer(1));
         StartCoroutine(FetchRankingFromServer(2));
-    }
-
-    public void MoveScene(string sceneName)
-    {
-        hasSubmitted = false;
-        runTime = 0;
     }
     
     void Update()
@@ -112,7 +106,7 @@ public class GameManager : MonoBehaviour
 
         if (request.result != UnityWebRequest.Result.Success)
         {
-            Debug.LogError("Submit failed: " + request.error);
+            Debug.Log("Submit failed: " + request.error);
         }
         else
         {
@@ -138,7 +132,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            Debug.LogError("Fetch failed: " + request.error);
+            Debug.Log("Fetch failed: " + request.error);
         }
     }
 }

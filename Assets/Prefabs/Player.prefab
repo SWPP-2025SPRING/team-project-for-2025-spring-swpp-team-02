@@ -39,7 +39,7 @@ Transform:
   m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
   m_ConstrainProportionsScale: 1
   m_Children:
-  - {fileID: 6868980319617993611}
+  - {fileID: 1916481393372231929}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -122,6 +122,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeUI: {fileID: 0}
+  RankingUI: {fileID: 0}
+  mapNumber: 0
 --- !u!54 &444247440589350739
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -207,7 +209,7 @@ CapsuleCollider:
   m_Height: 1.25
   m_Direction: 2
   m_Center: {x: -0.3, y: -0.3, z: 0}
---- !u!1001 &6402214627119705184
+--- !u!1001 &2094750869007736594
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -262,14 +264,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: zzang_SIT_DOWN
       objectReference: {fileID: 0}
-    - target: {fileID: 919132149155446097, guid: 695f06e6db1631d40ab8ea8a021fc065, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 695f06e6db1631d40ab8ea8a021fc065, type: 3}
---- !u!4 &6868980319617993611 stripped
+--- !u!4 &1916481393372231929 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 695f06e6db1631d40ab8ea8a021fc065, type: 3}
-  m_PrefabInstance: {fileID: 6402214627119705184}
+  m_PrefabInstance: {fileID: 2094750869007736594}
   m_PrefabAsset: {fileID: 0}

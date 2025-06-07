@@ -23,7 +23,7 @@ public class ParticleManager : MonoBehaviour
 {
     public static ParticleManager instance; // Singleton 패턴 적용을 위한 instance
 
-    public List<ParticleObject> particles;
+    public List<ParticleObject> particles = new List<ParticleObject>();
     public Dictionary<string, List<ParticleSystem>> pool = new Dictionary<string, List<ParticleSystem>>();
 
     void Awake()

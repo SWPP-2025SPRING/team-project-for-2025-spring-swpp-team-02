@@ -5,8 +5,8 @@ using Cinemachine;
 
 public class CameraChange : MonoBehaviour
 {
-    [SerializeField] CinemachineMixingCamera mixingCamera;
-    [SerializeField] List<string> sectorName;
+    public CinemachineMixingCamera mixingCamera;
+    public List<string> sectorName;
     int currentCamera = 0;
     void OnTriggerEnter(Collider other)
     {
@@ -26,9 +26,10 @@ public class CameraChange : MonoBehaviour
 
     void CameraInit()
     {
-        mixingCamera.SetWeight(0, 0);
-        mixingCamera.SetWeight(1, 0);
-        mixingCamera.SetWeight(2, 0);
+        for (int i = 0; i < sectorName.Count; i++)
+        {
+            mixingCamera.SetWeight(i, 0);
+        }
 
         mixingCamera.SetWeight(currentCamera, 1);
     }
