@@ -11,7 +11,7 @@ public class Monkey : ObstacleBase
     private Rigidbody rb;
     private Transform playerTransform;
 
-    private LineRenderer trackLine; // Ʈ���� �׸� ���� ������
+    public LineRenderer trackLine; // Ʈ���� �׸� ���� ������
     public float pointReachThreshold = 5f; // ���� �󸶳� ��������� ���� ������ �Ѿ����
     private int currentPointIndex = 0;
     private Vector3[] trackPoints;
@@ -26,7 +26,7 @@ public class Monkey : ObstacleBase
         rb.centerOfMass = centerOfMass;
 
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
-        trackLine = GameObject.FindGameObjectWithTag("MonkeyLine").GetComponent<LineRenderer>();
+        //trackLine = GameObject.FindGameObjectWithTag("MonkeyLine").GetComponent<LineRenderer>();
         //trackPoints = new Vector3[trackLine.positionCount];
         //trackLine.GetPositions(trackPoints);
 
