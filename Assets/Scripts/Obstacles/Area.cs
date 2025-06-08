@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class Area : MonoBehaviour
 {
-    [SerializeField] private List<ObstacleBase> obstacles = new();
+    public List<ObstacleBase> obstacles = new();
 
-    // Æ®¸®°Å Ãæµ¹ ½Ã È£Ãâ
+    // Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½æµ¹ ï¿½ï¿½ È£ï¿½ï¿½
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))

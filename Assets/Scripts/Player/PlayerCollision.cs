@@ -4,10 +4,10 @@ using UnityEngine.SceneManagement;
 
 public class PlayerCollision : MonoBehaviour
 {
-    [SerializeField] private float wallParticleCooltime;
+    [SerializeField] private float wallParticleCooltime = 5;
     private bool isWallParticleCoolDown = false;
 
-    [SerializeField] private float obstacleParticleCooltime;
+    [SerializeField] private float obstacleParticleCooltime = 5;
     private bool isObstacleParticleCoolDown = false;
     private ParticleSystem clearParticle;
 

@@ -26,6 +26,7 @@ public class ObstacleBase : MonoBehaviour
     public virtual void StartMove()
     {
         isMoving = true;
+        gameObject.SetActive(true);
     }
 
     public virtual void StopMove()

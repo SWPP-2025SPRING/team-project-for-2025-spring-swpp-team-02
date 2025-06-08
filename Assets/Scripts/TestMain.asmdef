@@ -7,7 +7,13 @@
         "Cinemachine.Editor.Tests",
         "Cinemachine.Runtime.Tests",
         "Cinemachine",
-        "com.unity.cinemachine.editor"
+        "com.unity.cinemachine.editor",
+        "UnityEditor.TestRunner",
+        "UnityEditor.UI.EditorTests",
+        "UnityEngine.TestRunner",
+        "UnityEngine.UI.Tests",
+        "Unity.VisualScripting.State.Editor",
+        "Unity.Settings.Tests"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

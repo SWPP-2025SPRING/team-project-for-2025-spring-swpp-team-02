@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CoverageReport scope="Summary">
+  <Summary>
+    <Generatedon>2025-06-07 - 오후 11:58:48</Generatedon>
+    <Parser>MultiReportParser (2x OpenCoverParser)</Parser>
+    <Assemblies>1</Assemblies>
+    <Classes>23</Classes>
+    <Files>20</Files>
+    <Coveredlines>506</Coveredlines>
+    <Uncoveredlines>440</Uncoveredlines>
+    <Coverablelines>946</Coverablelines>
+    <Totallines>1682</Totallines>
+    <Linecoverage>53.4</Linecoverage>
+    <Coveredbranches>0</Coveredbranches>
+    <Totalbranches>0</Totalbranches>
+    <Coveredmethods>78</Coveredmethods>
+    <Totalmethods>116</Totalmethods>
+    <Methodcoverage>67.2</Methodcoverage>
+  </Summary>
+  <Coverage>
+    <Assembly name="TestMain" classes="23" coverage="53.4" coveredlines="506" coverablelines="946" totallines="2052" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="78" totalmethods="116" methodcoverage="67.2">
+      <Class name="Area" coverage="100" coveredlines="14" coverablelines="14" totallines="24" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="2" totalmethods="2" methodcoverage="100" />
+      <Class name="BoingWhenEnabled" coverage="100" coveredlines="48" coverablelines="48" totallines="98" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="8" totalmethods="8" methodcoverage="100" />
+      <Class name="CameraChange" coverage="100" coveredlines="32" coverablelines="32" totallines="53" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="4" totalmethods="4" methodcoverage="100" />
+      <Class name="GameManager" coverage="35.3" coveredlines="23" coverablelines="65" totallines="138" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="5" totalmethods="8" methodcoverage="62.5" />
+      <Class name="ItemCollision" coverage="100" coveredlines="10" coverablelines="10" totallines="18" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="1" totalmethods="1" methodcoverage="100" />
+      <Class name="LoadingCharacter" coverage="100" coveredlines="6" coverablelines="6" totallines="20" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="2" totalmethods="2" methodcoverage="100" />
+      <Class name="LoadingManager" coverage="0" coveredlines="0" coverablelines="52" totallines="80" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="0" totalmethods="5" methodcoverage="0" />
+      <Class name="LoadingText" coverage="100" coveredlines="15" coverablelines="15" totallines="34" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="3" totalmethods="3" methodcoverage="100" />
+      <Class name="MenuScene" coverage="80.2" coveredlines="65" coverablelines="81" totallines="135" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="11" totalmethods="13" methodcoverage="84.6" />
+      <Class name="Monkey" coverage="82.5" coveredlines="90" coverablelines="109" totallines="188" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="6" totalmethods="6" methodcoverage="100" />
+      <Class name="ObstacleBase" coverage="85" coveredlines="17" coverablelines="20" totallines="41" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="5" totalmethods="6" methodcoverage="83.3" />
+      <Class name="ParticleManager" coverage="60.4" coveredlines="29" coverablelines="48" totallines="94" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="5" totalmethods="5" methodcoverage="100" />
+      <Class name="ParticleObject" coverage="0" coveredlines="0" coverablelines="5" totallines="94" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="0" totalmethods="1" methodcoverage="0" />
+      <Class name="PlayerCollision" coverage="68.9" coveredlines="40" coverablelines="58" totallines="94" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="7" totalmethods="7" methodcoverage="100" />
+      <Class name="PlayerController" coverage="48.5" coveredlines="65" coverablelines="134" totallines="197" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="10" totalmethods="12" methodcoverage="83.3" />
+      <Class name="PlayerUI" coverage="48.1" coveredlines="13" coverablelines="27" totallines="52" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="3" totalmethods="6" methodcoverage="50" />
+      <Class name="PlayerUseItem" coverage="86.6" coveredlines="39" coverablelines="45" totallines="67" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="6" totalmethods="6" methodcoverage="100" />
+      <Class name="Ranking" coverage="0" coveredlines="0" coverablelines="2" totallines="138" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="0" totalmethods="1" methodcoverage="0" />
+      <Class name="RankingLobbyController" coverage="0" coveredlines="0" coverablelines="88" totallines="202" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="0" totalmethods="8" methodcoverage="0" />
+      <Class name="ReadyManager" coverage="0" coveredlines="0" coverablelines="23" totallines="44" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="0" totalmethods="3" methodcoverage="0" />
+      <Class name="Record" coverage="0" coveredlines="0" coverablelines="4" totallines="138" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="0" totalmethods="1" methodcoverage="0" />
+      <Class name="TransitionEffect" coverage="0" coveredlines="0" coverablelines="42" totallines="68" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="0" totalmethods="5" methodcoverage="0" />
+      <Class name="WallObstacle" coverage="0" coveredlines="0" coverablelines="18" totallines="35" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="0" totalmethods="3" methodcoverage="0" />
+    </Assembly>
+  </Coverage>
+</CoverageReport>
