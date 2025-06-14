@@ -1,8 +1,11 @@
  using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
+using System.Text.RegularExpressions;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MenuScene : MonoBehaviour
 {
@@ -14,19 +17,19 @@ public class MenuScene : MonoBehaviour
     public TextMeshProUGUI fullScreenButtonText;
     public GameObject caveRanking;
     public GameObject forestRanking;
+    public GameObject inputNamePanel;
+    public GameObject inputNameErrorText;
+    public GameObject initText;
+    public TMP_InputField nameInputField;
+    public TMP_InputField ipInputField;
     private int manualNumber = 0;
 
     void Start()
     {
-        if (!GameManager.instance.firstGame)
+        if (!GameManager.instance.isFirstGame)
         {
             lobbyPanel.SetActive(true);
         }
-    }
-
-    void Update()
-    {
-        
     }
 
     public void ManualInit()
@@ -59,17 +62,45 @@ public class MenuScene : MonoBehaviour
             lobbyPanel.SetActive(true);
             manualPanel.GetComponent<BoingWhenEnabled>().Hide();
             manualNumber = 0;
-            GameManager.instance.firstGame = false;
+            GameManager.instance.isFirstGame = false;
         }
 
         ManualInit();
     }
 
+    public void InitPlayer()
+    {
+        nameInputField.text = "";
+        GameManager.instance.nickname = "";
+        GameManager.instance.isFirstGame = true;
+        StartCoroutine(HideTextWithDely(initText, 2));
+    }
+
+    public void ServerIpEnter()
+    {
+        GameManager.instance.serverIp = ipInputField.text;
+    }
+
+    public void NickNameEnter()
+    {
+        if (!Regex.IsMatch(nameInputField.text, @"[a-zA-Z0-9]+$"))
+        {
+            StartCoroutine(HideTextWithDely(inputNameErrorText, 2));
+            return;
+        }
+
+        GameManager.instance.nickname = nameInputField.text;  
+
+        inputNamePanel.SetActive(false);
+        inputNamePanel.GetComponent<BoingWhenEnabled>().SetHidden();
+        manualPanel.SetActive(true);
+    }
+
     public void StartButton()
     {
-        if (GameManager.instance.firstGame)
+        if (GameManager.instance.isFirstGame)
         {
-            manualPanel.SetActive(true);
+            inputNamePanel.SetActive(true);
         }
         else
         {
@@ -111,13 +142,13 @@ public class MenuScene : MonoBehaviour
 
     public void EndButton()
     {
-        #if UNITY_EDITOR
-                // �����Ϳ����� �÷��� ��� ����
-                UnityEditor.EditorApplication.isPlaying = false;
-        #else
+#if UNITY_EDITOR
+        // �����Ϳ����� �÷��� ��� ����
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
                 // ����� ���ӿ����� ���ø����̼� ����
                 Application.Quit();
-        #endif
+#endif
     }
 
     public void ToggleFullScreen()
@@ -131,5 +162,12 @@ public class MenuScene : MonoBehaviour
         {
             fullScreenButtonText.text = "ON";
         }
+    }
+
+    private IEnumerator HideTextWithDely(GameObject text, float delay)
+    {
+        text.SetActive(true);
+        yield return new WaitForSeconds(delay);
+        text.SetActive(false);
     }
 }

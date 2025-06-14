@@ -25,7 +25,7 @@ public class TransitionEffect : MonoBehaviour
 
     void Start()
     {
-        if (GameManager.instance.firstGame)
+        if (GameManager.instance.isFirstGame)
         {
             transitionUI.fillAmount = 0;
         }

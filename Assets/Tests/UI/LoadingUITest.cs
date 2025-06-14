@@ -14,7 +14,7 @@ public class LoadingUITest
     {
         gameManager = new GameObject();
         manager = gameManager.AddComponent<GameManager>();
-        manager.firstGame = true;
+        manager.isFirstGame = true;
     }
 
     [UnityTest]

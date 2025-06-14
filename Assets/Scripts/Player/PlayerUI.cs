@@ -42,7 +42,6 @@ public class PlayerUI : MonoBehaviour
         yield return new WaitForSeconds(1);
 
         RankingUI.SetActive(true);
-        GameManager.instance.AddRecord("test", GameManager.instance.runTime, mapNumber);
     }
 
     public void BackToLobby()

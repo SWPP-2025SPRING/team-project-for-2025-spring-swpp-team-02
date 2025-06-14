@@ -42,10 +42,11 @@ public class GameManager : MonoBehaviour
 
     public bool isRun;
     public float runTime;
+    public string nickname;
     public bool hasSubmitted = false; // 기록 전송 여부
 
     public Ranking ranking;
-    public bool firstGame = true;
+    public bool isFirstGame = true;
 
     private void Awake()
     {
@@ -82,12 +83,12 @@ public class GameManager : MonoBehaviour
     }
 
     // 저장시 정렬해서 저장
-    public void AddRecord(string name, float time, int mapNum)
+    public void AddRecord(float time, int mapNum)
     {   
         if (hasSubmitted) return; // 이미 전송했으면 그냥 리턴
         hasSubmitted = true;      // 최초 1회 전송
 
-        StartCoroutine(SubmitRecordToServer(name, time, mapNum));
+        StartCoroutine(SubmitRecordToServer(nickname, time, mapNum));
     }
 
     // 서버로 기록 전송
