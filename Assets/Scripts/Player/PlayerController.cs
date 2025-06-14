@@ -15,8 +15,6 @@ public class PlayerController : MonoBehaviour
     private Vector3 playerMoveDirection;
     private Rigidbody myRigidbody;
     private KeyCode previousInput = KeyCode.None;
-    private float adSpeed = 0;
-    private float drag = 0.9f;
 
     private bool isParticleDelay = false;
 
@@ -35,7 +33,6 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         playerMoveInput();
-        PlayerAcceleration();
         JumpCheck();
     }
 
@@ -70,23 +67,6 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
         jumpCoroutine = null;
         isJump = true;
-    }
-
-    private void PlayerAcceleration()
-    {
-        if (Input.GetKeyDown(KeyCode.A) & previousInput != KeyCode.A)
-        {
-            previousInput = KeyCode.A;
-            adSpeed += 1;
-        }
-        if (Input.GetKeyDown(KeyCode.D) & previousInput != KeyCode.D)
-        {
-            previousInput = KeyCode.D;
-            adSpeed += 1;
-        }
-
-        adSpeed *= drag;
-        //moveSpeed = yIntercept + Mathf.Sqrt(xCoeff * adSpeed) * yCoeff;
     }
 
     private void playerMoveInput()
