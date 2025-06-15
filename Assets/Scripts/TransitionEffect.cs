@@ -7,9 +7,8 @@ public class TransitionEffect : MonoBehaviour
 {
     public static TransitionEffect instance;
 
-    [SerializeField] private Image transitionUI;
-    [SerializeField] private float transitionTime;
-    //[SerializeField] private float initialFill = 1;
+    public Image transitionUI;
+    public float transitionTime;
 
     private void Awake()
     {
@@ -43,6 +42,11 @@ public class TransitionEffect : MonoBehaviour
         GameManager.instance.runTime = 0;
         GameManager.instance.isRun = false;
         StartCoroutine(SceneTransitionStart(sceneName));
+    }
+
+    public void FadeOutMusic(AudioSource audioSource)
+    {
+        SoundManager.instance.FadeOut(audioSource);
     }
 
     private IEnumerator SceneTransitionStart(string sceneName)

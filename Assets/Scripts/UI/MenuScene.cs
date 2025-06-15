@@ -68,6 +68,12 @@ public class MenuScene : MonoBehaviour
         ManualInit();
     }
 
+    public void ChangeVolume(Scrollbar scrollbar)
+    {
+        SoundManager.instance.volume = scrollbar.value;
+        SoundManager.instance.SetVolume();
+    }
+
     public void InitPlayer()
     {
         nameInputField.text = "";
@@ -89,7 +95,7 @@ public class MenuScene : MonoBehaviour
             return;
         }
 
-        GameManager.instance.nickname = nameInputField.text;  
+        GameManager.instance.nickname = nameInputField.text;
 
         inputNamePanel.SetActive(false);
         inputNamePanel.GetComponent<BoingWhenEnabled>().SetHidden();
@@ -169,5 +175,10 @@ public class MenuScene : MonoBehaviour
         text.SetActive(true);
         yield return new WaitForSeconds(delay);
         text.SetActive(false);
+    }
+
+    public void ClickButton()
+    {
+        SoundManager.instance.PlayAudio("ButtonClickSound");
     }
 }

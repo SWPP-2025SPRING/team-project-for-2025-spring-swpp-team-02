@@ -32,7 +32,8 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        playerMoveInput();
+        PlayerMoveInput();
+        PlayerInput();
         JumpCheck();
     }
 
@@ -69,7 +70,7 @@ public class PlayerController : MonoBehaviour
         isJump = true;
     }
 
-    private void playerMoveInput()
+    private void PlayerMoveInput()
     {
         // 카메라 방향 확인
         Vector3 cameraForward = virtualCamera.transform.forward;
@@ -92,6 +93,19 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKey(KeyCode.RightArrow))
         {
             playerMoveDirection += Vector3.Cross(Vector3.up, cameraForward);
+        }
+    }
+
+    private void PlayerInput()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            TransitionEffect.instance.MoveScene("MenuScene");
+        }
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            transform.position = virtualCamera.transform.position - Vector3.down * 0.5f;
+            myRigidbody.velocity = Vector3.zero;
         }
     }
     
