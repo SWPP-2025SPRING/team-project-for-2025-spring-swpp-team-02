@@ -15,7 +15,7 @@ public class MenuUITest
     {
         gameManager = new GameObject();
         manager = gameManager.AddComponent<GameManager>();
-        manager.firstGame = true;
+        manager.isFirstGame = true;
 
         menuSceneObj = new GameObject();
         menuScene = menuSceneObj.AddComponent<MenuScene>();
@@ -93,7 +93,7 @@ public class MenuUITest
         menuScene.manualPanel.SetActive(false);
         yield return null;
 
-        GameManager.instance.firstGame = false;
+        GameManager.instance.isFirstGame = false;
         menuScene.StartButton();
         yield return new WaitForSeconds(0.05f);
         Assert.AreEqual(false, menuScene.manualPanel.activeSelf);

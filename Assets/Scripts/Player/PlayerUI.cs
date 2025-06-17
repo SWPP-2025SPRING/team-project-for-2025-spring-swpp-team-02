@@ -1,4 +1,5 @@
 using System.Collections;
+using Codice.CM.Common;
 using TMPro;
 using UnityEngine;
 
@@ -15,11 +16,6 @@ public class PlayerUI : MonoBehaviour
     void Update()
     {
         UpdateTimeUI();
-
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            TransitionEffect.instance.MoveScene("MenuScene");
-        }
     }
 
     void UpdateTimeUI()
@@ -42,7 +38,6 @@ public class PlayerUI : MonoBehaviour
         yield return new WaitForSeconds(1);
 
         RankingUI.SetActive(true);
-        GameManager.instance.AddRecord("test", GameManager.instance.runTime, mapNumber);
     }
 
     public void BackToLobby()

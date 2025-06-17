@@ -43,11 +43,10 @@ public class PlayerCollision : MonoBehaviour
             Debug.Log("Goal 도착: AddRecord 호출됨!");
 
             // 기록 제출 (디폴트 이름: "Player")
-            string playerName = "Player"; // 나중에 UI 에서 입력 받으면 대체
             float recordTime = GameManager.instance.runTime;
             int currentMap = SceneManager.GetActiveScene().name == "CaveMap" ? 1 : 2;
 
-            GameManager.instance.AddRecord(playerName, recordTime, currentMap);
+            GameManager.instance.AddRecord(recordTime, currentMap);
             Debug.Log("[PlayerCollision] recordTime = " + GameManager.instance.runTime);
 
             GameManager.instance.isRun = false;
