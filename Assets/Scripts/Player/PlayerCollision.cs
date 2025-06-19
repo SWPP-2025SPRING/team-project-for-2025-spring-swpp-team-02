@@ -40,15 +40,17 @@ public class PlayerCollision : MonoBehaviour
                 if (clearParticle != null) clearParticle.Play();
             }
 
-            Debug.Log("Goal 도착: AddRecord 호출됨!");
+            if (GameManager.instance.isNetworkConnected)
+            {
+                Debug.Log("Goal 도착: AddRecord 호출됨!");
 
-            // 기록 제출 (디폴트 이름: "Player")
-            float recordTime = GameManager.instance.runTime;
-            int currentMap = SceneManager.GetActiveScene().name == "CaveMap" ? 1 : 2;
+                float recordTime = GameManager.instance.runTime;
+                int currentMap = SceneManager.GetActiveScene().name == "CaveMap" ? 1 : 2;
 
-            GameManager.instance.AddRecord(recordTime, currentMap);
-            Debug.Log("[PlayerCollision] recordTime = " + GameManager.instance.runTime);
-
+                GameManager.instance.AddRecord(recordTime, currentMap);
+                Debug.Log("[PlayerCollision] recordTime = " + GameManager.instance.runTime);
+            }
+            
             GameManager.instance.isRun = false;
             gameObject.GetComponent<PlayerUI>().PlayEndUI();
         }

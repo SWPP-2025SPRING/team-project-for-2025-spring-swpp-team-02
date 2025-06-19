@@ -28,14 +28,13 @@ public class ObstacleMonkeyTest
         line.positionCount = 4;
         line.SetPositions(points);
 
-        monkeyLine.tag = "MonkeyLine";
-
         monkey = new GameObject();
         monkey.transform.position = new Vector3(0, 0, 0);
         monkey.AddComponent<BoxCollider>();
         monkeyRigid = monkey.AddComponent<Rigidbody>();
         script = monkey.AddComponent<Monkey>();
         script.pointReachThreshold = 0.1f;
+        script.trackLine = line;
 
         GameObject ground = new GameObject();
         BoxCollider groundCollider = ground.AddComponent<BoxCollider>();

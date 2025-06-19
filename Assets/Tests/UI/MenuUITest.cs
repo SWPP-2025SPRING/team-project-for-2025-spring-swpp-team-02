@@ -54,6 +54,10 @@ public class MenuUITest
         menuScene.forestRanking = new GameObject();
         menuScene.forestRanking.SetActive(false);
         menuScene.forestRanking.AddComponent<BoingWhenEnabled>();
+
+        menuScene.inputNamePanel = new GameObject();
+        menuScene.inputNamePanel.SetActive(false);
+        menuScene.inputNamePanel.AddComponent<BoingWhenEnabled>();
     }
 
     [UnityTest]
@@ -87,16 +91,16 @@ public class MenuUITest
 
         menuScene.StartButton();
         yield return new WaitForSeconds(0.05f);
-        Assert.AreEqual(true, menuScene.manualPanel.activeSelf);
+        Assert.AreEqual(true, menuScene.inputNamePanel.activeSelf);
         Assert.AreEqual(false, menuScene.lobbyPanel.activeSelf);
 
-        menuScene.manualPanel.SetActive(false);
+        menuScene.inputNamePanel.SetActive(false);
         yield return null;
 
         GameManager.instance.isFirstGame = false;
         menuScene.StartButton();
         yield return new WaitForSeconds(0.05f);
-        Assert.AreEqual(false, menuScene.manualPanel.activeSelf);
+        Assert.AreEqual(false, menuScene.inputNamePanel.activeSelf);
         Assert.AreEqual(true, menuScene.lobbyPanel.activeSelf);
 
         menuScene.Close();
