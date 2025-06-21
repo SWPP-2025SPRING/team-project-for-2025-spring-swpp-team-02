@@ -1,12 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerUseItem : MonoBehaviour
 {
     public int itemCount = 0;
     public bool isBoosting = false;
-    public List<GameObject> itemUI = new List<GameObject>();
     ParticleSystem particle;
 
     [Header("초코비 능력")]
@@ -21,6 +21,8 @@ public class PlayerUseItem : MonoBehaviour
     private int originalLayer;
     public string ghostLayerName = "PlayerWithChocobee"; // 새로 만든 레이어명
 
+    public GameObject ghostUI;
+
 
     void Start()
     {
@@ -32,10 +34,10 @@ public class PlayerUseItem : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && itemCount > 0 && !isBoosting)
-        {
-            UseItem();
-        }
+        //if (Input.GetKeyDown(KeyCode.Space) && itemCount > 0 && !isBoosting)
+        //{
+        //    UseItem();
+        //}
 
         if (particle != null)
         {
@@ -43,41 +45,19 @@ public class PlayerUseItem : MonoBehaviour
         }
     }
 
-    public void GetItem()
-    {
-        itemCount++;
-
-        if (itemCount > itemUI.Count)
-        {
-            itemCount = itemUI.Count;
-        }
-
-        ChangeItemUI();
-    }
-
-    public void UseItem()
-    {
-        if (itemCount > 0)
-        {
-            itemCount--;
-            particle = ParticleManager.instance.GetParticle("UseItem");
-            StartCoroutine(Boost());
-            if (particle != null)
-            {
-                particle.Play();
-            }
-
-            ChangeItemUI();
-        }
-    }
-
-    void ChangeItemUI()
-    {
-        for (int i = 0; i < itemUI.Count; i++)
-        {
-            itemUI[i].SetActive(i < itemCount); // item의 개수만큼 활성화
-        }
-    }
+    //public void UseItem()
+    //{
+    //    if (itemCount > 0)
+    //    {
+    //        itemCount--;
+    //        particle = ParticleManager.instance.GetParticle("UseItem");
+    //        StartCoroutine(Boost());
+    //        if (particle != null)
+    //        {
+    //            particle.Play();
+    //        }
+    //    }
+    //}
 
     IEnumerator Boost()
     {
@@ -105,12 +85,25 @@ public class PlayerUseItem : MonoBehaviour
         else
             Debug.LogWarning($"레이어 '{ghostLayerName}'가 존재하지 않습니다.");
 
+        if (ghostUI != null)
+        {
+            ghostUI.SetActive(true);
+            Transform fillTransform = ghostUI.transform.GetChild(1);
+            Image fillImage = fillTransform.GetComponent<Image>();
+
+            if (fillImage != null)
+            {
+                fillImage.fillAmount = 1f;
+                fillImage.gameObject.SetActive(true);
+            }
+        }
 
         ghostCoroutine = StartCoroutine(GhostCoroutine());
     }
 
     private void ResetGhostEffect()
     {
+        ghostUI.GetComponent<BoingWhenEnabled>().Hide();
 
         // 플레이어 머티리얼 복원
         int matIndex = 0;
@@ -151,35 +144,57 @@ public class PlayerUseItem : MonoBehaviour
 
     private IEnumerator GhostCoroutine()
     {
+        // 렌더러 먼저 설정
         playerRenderers.Clear();
         originalPlayerMaterials.Clear();
 
-        // 플레이어의 모든 렌더러 수집
         playerRenderers.AddRange(gameObject.GetComponentsInChildren<Renderer>());
 
-        // 머티리얼 백업 + 반투명 적용
         foreach (var renderer in playerRenderers)
         {
             if (renderer != null)
             {
                 Material[] originalMats = renderer.sharedMaterials;
-                originalPlayerMaterials.AddRange(originalMats); // 복수 백업
+                originalPlayerMaterials.AddRange(originalMats);
 
                 Material[] ghostMats = new Material[originalMats.Length];
                 for (int i = 0; i < originalMats.Length; i++)
                 {
-                    ghostMats[i] = new Material(ghostMaterial); // 고스트 복제
+                    ghostMats[i] = new Material(ghostMaterial);
                     ghostMats[i].color = new Color(1f, 1f, 1f, 0.3f);
                 }
 
-                renderer.materials = ghostMats; // 전체 교체
+                renderer.materials = ghostMats;
             }
         }
 
+        // UI 타이머 시작
+        Image fillImage = null;
+        if (ghostUI != null && ghostUI.transform.childCount > 1)
+        {
+            Transform fillTransform = ghostUI.transform.GetChild(1);
+            fillImage = fillTransform.GetComponent<Image>();
 
-        // 효과 지속 시간 대기
-        yield return new WaitForSeconds(ghostDuration);
+            if (fillImage != null)
+            {
+                fillImage.fillAmount = 1f;
+                fillImage.gameObject.SetActive(true);
+            }
+        }
 
+        float elapsed = 0f;
+        while (elapsed < ghostDuration)
+        {
+            elapsed += Time.deltaTime;
+            if (fillImage != null)
+                fillImage.fillAmount = Mathf.Lerp(1f, 0f, elapsed / ghostDuration);
+            yield return null;
+        }
+
+        if (fillImage != null)
+            fillImage.gameObject.SetActive(false);
+
+        // 효과 종료
         ResetGhostEffect();
     }
 
