@@ -171,7 +171,7 @@ public class RankingLobbyController : MonoBehaviour
             {
                 Record r = wrapper.records[i];
                 string formattedTime = FormatTime(r.time);
-                sb.AppendLine($"{i + 1}위: {r.name} {formattedTime}");
+                sb.AppendLine($"{r.rank}위: {r.name} {formattedTime}");
             }
 
             Debug.Log($"[RankingLobby] 최종 렌더링 문자열:\n{sb}");

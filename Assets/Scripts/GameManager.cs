@@ -8,11 +8,13 @@ using UnityEngine.Networking;
 [Serializable]
 public struct Record
 {
+    public int rank;
     public string name;
     public float time;
 
     public Record(string _name, float _time)
     {
+        rank = 0;
         name = _name;
         time = _time;
     }
@@ -146,10 +148,15 @@ public class GameManager : MonoBehaviour
 
             cleanedList.Sort((a, b) => a.time.CompareTo(b.time)); // 오름차순 정렬
 
-            if (mapNum == 1)
+            if (mapNum == 1) 
+            {
                 ranking.Map1 = cleanedList;
-            else
+            }
+            else 
+            {
                 ranking.Map2 = cleanedList;
+            }
+
         }
     }
 }

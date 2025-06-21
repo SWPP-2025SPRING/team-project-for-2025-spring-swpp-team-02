@@ -88,8 +88,15 @@ def get_ranking(map_num):
 
         # 닉네임이 있다면, 내 기록을 찾아서 추가 (단, 중복이면 제외)
         if nickname:
-            my_record = next((r for r in ranked if r["name"] == nickname), None)
+            my_record = None
+            for j, r in enumerate(ranked):
+                if r["name"] == nickname:
+                    ra = j + 1
+                    my_record = r
+                    break
+
             if my_record and all(r["name"] != nickname for r in top10):
+                my_record["rank"] = ra
                 top10.append(my_record)  # 내 기록이 top10에 없을 때만 추가
 
     return jsonify(top10)
