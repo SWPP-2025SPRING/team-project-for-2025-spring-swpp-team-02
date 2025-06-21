@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7112880188198118665}
   - component: {fileID: 1263348441523330771}
   - component: {fileID: 4712083051103105918}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Bush_01_LOD1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -93,7 +93,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4263922822445036487}
   - component: {fileID: 1256791195242761781}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Bush_01
   m_TagString: Obstacle
   m_Icon: {fileID: 0}
@@ -152,7 +152,7 @@ GameObject:
   - component: {fileID: 7439166885557572259}
   - component: {fileID: 7688825897537880626}
   - component: {fileID: 577572581637733345}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Bush_01_LOD0
   m_TagString: Obstacle
   m_Icon: {fileID: 0}

@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -41,28 +40,27 @@ public class TransitionEffect : MonoBehaviour
         GameManager.instance.hasSubmitted = false;
         GameManager.instance.runTime = 0;
         GameManager.instance.isRun = false;
+        SoundManager.instance.FadeOutMusic();
         StartCoroutine(SceneTransitionStart(sceneName));
-    }
-
-    public void FadeOutMusic(AudioSource audioSource)
-    {
-        SoundManager.instance.FadeOut(audioSource);
     }
 
     private IEnumerator SceneTransitionStart(string sceneName)
     {
         transitionUI.fillClockwise = true;
+        SoundManager.instance.PlayAudio("Effect", "TransitionSound");
         while (transitionUI.fillAmount < 1)
         {
             transitionUI.fillAmount += Time.deltaTime / transitionTime;
             yield return null;
         }
         LoadingManager.LoadScene(sceneName);
+        GameManager.instance.currentSceneName = sceneName;
     }
 
     private IEnumerator SceneTransitionEnd()
     {
         transitionUI.fillClockwise = false;
+        SoundManager.instance.ChangeSceneMusic();
         while (transitionUI.fillAmount > 0)
         {
             transitionUI.fillAmount -= Time.deltaTime / transitionTime;
