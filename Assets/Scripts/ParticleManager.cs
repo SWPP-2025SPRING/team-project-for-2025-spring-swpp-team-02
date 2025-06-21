@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -25,9 +26,10 @@ public class ParticleManager : MonoBehaviour
 
     public List<ParticleObject> particles = new List<ParticleObject>();
     public Dictionary<string, List<ParticleSystem>> pool = new Dictionary<string, List<ParticleSystem>>();
+    private Dictionary<string, bool> coolDown = new Dictionary<string, bool>();
 
     void Awake()
-    { 
+    {
         // Singleton 패턴 적용
         if (instance == null)
         {
@@ -82,7 +84,7 @@ public class ParticleManager : MonoBehaviour
             ParticleSystem newParticle = Instantiate(pool[name][0].gameObject).GetComponent<ParticleSystem>();
             pool[name].Add(newParticle);
             newParticle.transform.parent = transform;
-            
+
             return newParticle;
         }
         else
@@ -90,5 +92,41 @@ public class ParticleManager : MonoBehaviour
             Debug.LogError($"요청한 파티클이 없습니다. 요청한 파티클: {name}");
             return null;
         }
+    }
+
+    public void Play(string particleName, Vector3 position, Quaternion rotation)
+    {
+        ParticleSystem particle = GetParticle(particleName);
+        particle.transform.position = position;
+        particle.transform.rotation = rotation;
+
+        particle.Play();
+    }
+
+    public void Play(string particleName, Vector3 position)
+    {
+        Play(particleName, position, Quaternion.identity);
+    }
+
+    public void PlayWithDelay(string particleName, Vector3 position, Quaternion rotation, float delay)
+    {
+        if (!coolDown.ContainsKey(particleName))
+        {
+            coolDown.Add(particleName, false);
+        }
+
+        if (!coolDown[particleName])
+        {
+            Play(particleName, position, rotation);
+            StartCoroutine(DelayCoroutine(particleName, delay));
+        }
+    }
+
+    private IEnumerator DelayCoroutine(string particleName, float time)
+    {
+        coolDown[particleName] = true;
+        yield return new WaitForSeconds(time);
+        coolDown[particleName] = false;
+
     }
 }

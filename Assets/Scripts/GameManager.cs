@@ -1,11 +1,8 @@
 using System;
-using System.IO;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.Networking;
-using UnityEngine.UI;
 
 // 저장할 구조체, 클래스
 [Serializable]
@@ -48,6 +45,7 @@ public class GameManager : MonoBehaviour
     public Ranking ranking;
     public bool isFirstGame = true;
     public bool isNetworkConnected = false;
+    public string currentSceneName = "MenuScene";
 
     private void Awake()
     {

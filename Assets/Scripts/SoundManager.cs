@@ -8,7 +8,9 @@ public class SoundManager : MonoBehaviour
 {
     public static SoundManager instance;
     public float volume = 1;
-    private Dictionary<string, AudioSource> audios = new Dictionary<string, AudioSource>(); 
+    private Dictionary<string, Dictionary<string, AudioSource>> audios = new Dictionary<string, Dictionary<string, AudioSource>>();
+    private AudioSource currentMusic;
+
     private void Awake()
     {
         if (instance != null)
@@ -26,33 +28,64 @@ public class SoundManager : MonoBehaviour
     {
         for (int i = 0; i < transform.childCount; i++)
         {
-            Transform child = transform.GetChild(i);
-            audios.Add(child.name, child.GetComponent<AudioSource>());
+            Transform typeTransform = transform.GetChild(i);
+            audios.Add(typeTransform.name, new Dictionary<string, AudioSource>());
+            for (int j = 0; j < typeTransform.childCount; j++)
+            {
+                Transform audio = typeTransform.GetChild(j);
+                audios[typeTransform.name].Add(audio.name, audio.GetComponent<AudioSource>());
+            }
         }
     }
 
-    public void PlayAudio(string audioName)
+    public void ChangeSceneMusic()
     {
-        audios[audioName].Play();
+        if (GameManager.instance.currentSceneName == "MenuScene")
+        {
+            PlayAudio("Music", "MenuMusic");
+        }
+        else if (GameManager.instance.currentSceneName == "CaveMap")
+        {
+            PlayAudio("Music", "CaveMusic");
+        }
+        else if (GameManager.instance.currentSceneName == "ForestMap")
+        {
+            PlayAudio("Music", "ForestMusic");
+        }
+    }
+
+    public void PlayAudio(string audioType, string audioName)
+    {
+        if (audioType == "Music")
+        {
+            FadeOutMusic();
+            currentMusic = audios[audioType][audioName];
+        }
+
+        audios[audioType][audioName].Play();
     }
 
     public void SetVolume()
     {
-        List<String> keys = audios.Keys.ToList();
+        List<String> typeKeys = audios.Keys.ToList();
         for (int i = 0; i < audios.Count; i++)
         {
-            audios[keys[i]].volume = volume;
+            string type = typeKeys[i];
+            List<String> nameKeys = audios[type].Keys.ToList();
+            for (int j = 0; j < audios[type].Count; j++)
+            {
+                audios[type][nameKeys[j]].volume = volume;
+            }
         }
     }
 
-    public void FadeOut(AudioSource audioSource)
+    public void FadeOutMusic()
     {
-        if (audioSource == null)
+        if (currentMusic == null)
         {
             return;
         }
-        Debug.Log("run");
-        StartCoroutine(FadeOutCoroutine(audioSource));
+        StartCoroutine(FadeOutCoroutine(currentMusic));
     }
 
     IEnumerator FadeOutCoroutine(AudioSource audioSource)
