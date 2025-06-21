@@ -1820,6 +1820,7 @@ Transform:
   - {fileID: 3183292463359279332}
   - {fileID: 4312150166226208621}
   - {fileID: 8099027741719804031}
+  - {fileID: 1789592203515553070}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1873,6 +1874,59 @@ MonoBehaviour:
   - {fileID: 1109839327352344207}
   - {fileID: 3953531065101951680}
   delay: 1
+--- !u!1 &8738366459665507489
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1789592203515553070}
+  - component: {fileID: 7837632923346382677}
+  m_Layer: 0
+  m_Name: RankingLobbyController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1789592203515553070
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8738366459665507489}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 533.06793, y: 309.03934, z: 0.038107157}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6239542640175349213}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7837632923346382677
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8738366459665507489}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef8a50cb7f178ed40816fc8ad9d845b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  port: 8080
+  caveClickable: {fileID: 0}
+  forestClickable: {fileID: 0}
+  caveRankingPanel: {fileID: 0}
+  forestRankingPanel: {fileID: 0}
+  caveContextText: {fileID: 0}
+  forestContextText: {fileID: 0}
+  caveReturnButton: {fileID: 0}
+  forestReturnButton: {fileID: 0}
 --- !u!1001 &3183292463351937921
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2024,6 +2078,10 @@ PrefabInstance:
       propertyPath: RankingUI
       value: 
       objectReference: {fileID: 786612700884297098}
+    - target: {fileID: 2767117854600257240, guid: af94f4ad3c81efa48be9acc4062684d7, type: 3}
+      propertyPath: rankingLobbyController
+      value: 
+      objectReference: {fileID: 7837632923346382677}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: af94f4ad3c81efa48be9acc4062684d7, type: 3}
 --- !u!4 &3028419032764210384 stripped

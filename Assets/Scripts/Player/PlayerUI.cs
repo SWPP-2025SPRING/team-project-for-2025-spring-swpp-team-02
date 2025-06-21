@@ -7,11 +7,12 @@ public class PlayerUI : MonoBehaviour
 {
     public TextMeshProUGUI timeUI;
     public GameObject RankingUI;
+    public RankingLobbyController rankingLobbyController;
     [SerializeField] private int mapNumber;
 
     void Start()
     {
-         
+        rankingLobbyController = FindObjectOfType<RankingLobbyController>();
     }
     void Update()
     {
@@ -38,6 +39,10 @@ public class PlayerUI : MonoBehaviour
         yield return new WaitForSeconds(1);
 
         RankingUI.SetActive(true);
+        TextMeshProUGUI contextText = RankingUI.transform.Find("Context").GetComponent<TextMeshProUGUI>();
+        contextText.text = "로딩 중...";
+        if (mapNumber == 1) StartCoroutine(rankingLobbyController.FetchRankingAndPopulate(1, contextText));
+        else if (mapNumber == 2) StartCoroutine(rankingLobbyController.FetchRankingAndPopulate(2, contextText));
     }
 
     public void BackToLobby()
