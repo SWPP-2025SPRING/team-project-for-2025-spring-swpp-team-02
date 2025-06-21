@@ -10,9 +10,7 @@ public class ItemCollision : MonoBehaviour
             particle.transform.position = transform.position;
             particle.Play();
             
-            other.GetComponent<PlayerUseItem>().GetItem();
-
-            Destroy(gameObject);
+            //other.GetComponent<PlayerUseItem>().GetItem();
         }
     }
 }
