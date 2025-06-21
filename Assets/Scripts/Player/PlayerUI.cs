@@ -6,6 +6,7 @@ public class PlayerUI : MonoBehaviour
 {
     public TextMeshProUGUI timeUI;
     public GameObject RankingUI;
+    public GameObject finishUI;
     public RankingLobbyController rankingLobbyController;
     [SerializeField] private int mapNumber;
 
@@ -35,6 +36,10 @@ public class PlayerUI : MonoBehaviour
 
     IEnumerator EndUIAnimation()
     {
+        finishUI.SetActive(true);
+        yield return new WaitForSeconds(2);
+        finishUI.GetComponent<BoingWhenEnabled>().Hide();
+
         yield return new WaitForSeconds(1);
 
         RankingUI.SetActive(true);
