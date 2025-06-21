@@ -43,8 +43,22 @@ def submit():
         return jsonify({'status': 'ignored (time <= 0)'})
 
     with lock:
-        ranking[key].append({'name': name, 'time': time})
-        ranking[key] = sorted(ranking[key], key=lambda x: x['time'])[:10]
+        # 기존 기록 중 동일 nickname이 있는지 확인
+        existing_index = next((i for i, r in enumerate(ranking[key]) if r['name'] == name), None)
+
+        if existing_index is not None:
+            old_time = ranking[key][existing_index]['time']
+            if time < old_time:
+                ranking[key][existing_index]['time'] = time  # 더 빠르면 갱신
+                print(f"Updated {name}'s record: {old_time} → {time}")
+            else:
+                print(f"Ignored slower time for {name}: {time} ≥ {old_time}")
+                return jsonify({'status': 'ignored (slower time)'})
+        else:
+            # 새로운 이름이면 그냥 추가
+            ranking[key].append({'name': name, 'time': time})
+            print(f"Added new record for {name}: {time}")
+            
         save_to_file()
 
     return jsonify({'status': 'ok'})
@@ -52,7 +66,40 @@ def submit():
 @app.route('/ranking/<int:map_num>', methods=['GET'])
 def get_ranking(map_num):
     key = f"map{map_num}"
-    return jsonify(ranking[key])
+    nickname = request.args.get("nickname")  # 쿼리에서 nickname 받기
+
+    with lock:
+        # 중복 닉네임 제거: 가장 빠른 기록만 유지
+        unique = {}
+        for r in ranking.get(key, []):
+            name = r["name"]
+            time = r["time"]
+            if name not in unique or time < unique[name]["time"]:
+                unique[name] = {"name": name, "time": time}
+
+        # 정렬
+        sorted_list = sorted(unique.values(), key=lambda x: x["time"])
+
+        # 랭킹 번호 부여
+        ranked = [{"rank": i + 1, "name": r["name"], "time": r["time"]} for i, r in enumerate(sorted_list)]
+
+        # 상위 10명 추출
+        top10 = ranked[:10]
+
+        # 닉네임이 있다면, 내 기록을 찾아서 추가 (단, 중복이면 제외)
+        if nickname:
+            my_record = None
+            for j, r in enumerate(ranked):
+                if r["name"] == nickname:
+                    ra = j + 1
+                    my_record = r
+                    break
+
+            if my_record and all(r["name"] != nickname for r in top10):
+                my_record["rank"] = ra
+                top10.append(my_record)  # 내 기록이 top10에 없을 때만 추가
+
+    return jsonify(top10)
 
 if __name__ == '__main__':
     load_from_file()

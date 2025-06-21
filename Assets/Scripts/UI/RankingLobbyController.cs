@@ -127,7 +127,7 @@ public class RankingLobbyController : MonoBehaviour
 
     public IEnumerator FetchRankingAndPopulate(int mapNum, TextMeshProUGUI targetText)
     {
-        string url = $"http://{GameManager.instance.serverIp}:{port}/ranking/{mapNum}";
+        string url = $"http://{GameManager.instance.serverIp}:{port}/ranking/{mapNum}?nickname={GameManager.instance.nickname}";
         Debug.Log($"[RankingLobby] 서버 요청 → {url}");
 
         using (UnityWebRequest request = UnityWebRequest.Get(url))
@@ -171,7 +171,7 @@ public class RankingLobbyController : MonoBehaviour
             {
                 Record r = wrapper.records[i];
                 string formattedTime = FormatTime(r.time);
-                sb.AppendLine($"{i + 1}위: {r.name} {formattedTime}");
+                sb.AppendLine($"{r.rank}위: {r.name} {formattedTime}");
             }
 
             Debug.Log($"[RankingLobby] 최종 렌더링 문자열:\n{sb}");

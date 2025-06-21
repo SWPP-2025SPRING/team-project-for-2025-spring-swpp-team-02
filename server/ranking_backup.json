@@ -1,46 +1,57 @@
 {
-  "map1": [
-    {
-      "name": "jaepyo",
-      "time": 147.1905
-    }
-  ],
-  "map2": [
-    {
-      "name": "alpakar02",
-      "time": 59.87276
-    },
-    {
-      "name": "alpakar02",
-      "time": 61.10376
-    },
-    {
-      "name": "alpakar02",
-      "time": 62.02427
-    },
-    {
-      "name": "alpakar02",
-      "time": 66.39101
-    },
-    {
-      "name": "alpakar02",
-      "time": 68.65882
-    },
-    {
-      "name": "dd",
-      "time": 69.61556
-    },
-    {
-      "name": "dd",
-      "time": 74.80319
-    },
-    {
-      "name": "alpakar02",
-      "time": 77.68481
-    },
-    {
-      "name": "jaepyo",
-      "time": 82.49992
-    }
-  ]
+    "map1": [],
+    "map2": [
+        {
+            "name": "alpakar02",
+            "time": 62.92299
+        },
+        {
+            "name": "11",
+            "time": 65.53857
+        },
+        {
+            "name": "22",
+            "time": 72.92299
+        },
+        {
+            "name": "alpakar02",
+            "time": 75.53857
+        },
+        {
+            "name": "66",
+            "time": 77.92299
+        },
+        {
+            "name": "33",
+            "time": 85.53857
+        },
+        {
+            "name": "77",
+            "time": 88.53857
+        },
+        {
+            "name": "99",
+            "time": 88.9857
+        },
+        {
+            "name": "44",
+            "time": 92.92299
+        },
+        {
+            "name": "100",
+            "time": 92.92299
+        },
+        {
+            "name": "1000",
+            "time": 93.92299
+        },
+        {
+            "name": "haha",
+            "time": 101.3767
+        },
+        {
+            "name": "hahaha",
+            "time": 129.6467
+        }
+    ]
 }

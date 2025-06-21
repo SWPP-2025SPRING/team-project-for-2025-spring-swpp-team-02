@@ -1272,7 +1272,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6239542640175349213}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8102166342562804207
 MonoBehaviour:
@@ -1819,6 +1819,7 @@ Transform:
   m_Children:
   - {fileID: 3028419032764210384}
   - {fileID: 3183292463359279332}
+  - {fileID: 3616757973619739644}
   - {fileID: 4312150166226208621}
   - {fileID: 8099027741719804031}
   m_Father: {fileID: 0}
@@ -1854,7 +1855,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6239542640175349213}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3923051594493416413
 MonoBehaviour:
@@ -1874,6 +1875,79 @@ MonoBehaviour:
   - {fileID: 1109839327352344207}
   - {fileID: 3953531065101951680}
   delay: 1
+--- !u!1001 &487227896472856244
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 6239542640175349213}
+    m_Modifications:
+    - target: {fileID: 3444957008353166234, guid: abb359b4516f4954fbba102bb786fd72, type: 3}
+      propertyPath: m_Name
+      value: RankingLobbyController
+      objectReference: {fileID: 0}
+    - target: {fileID: 3815592347992223048, guid: abb359b4516f4954fbba102bb786fd72, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3815592347992223048, guid: abb359b4516f4954fbba102bb786fd72, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 533.06793
+      objectReference: {fileID: 0}
+    - target: {fileID: 3815592347992223048, guid: abb359b4516f4954fbba102bb786fd72, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 309.03934
+      objectReference: {fileID: 0}
+    - target: {fileID: 3815592347992223048, guid: abb359b4516f4954fbba102bb786fd72, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.038107157
+      objectReference: {fileID: 0}
+    - target: {fileID: 3815592347992223048, guid: abb359b4516f4954fbba102bb786fd72, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3815592347992223048, guid: abb359b4516f4954fbba102bb786fd72, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3815592347992223048, guid: abb359b4516f4954fbba102bb786fd72, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3815592347992223048, guid: abb359b4516f4954fbba102bb786fd72, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3815592347992223048, guid: abb359b4516f4954fbba102bb786fd72, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3815592347992223048, guid: abb359b4516f4954fbba102bb786fd72, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3815592347992223048, guid: abb359b4516f4954fbba102bb786fd72, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: abb359b4516f4954fbba102bb786fd72, type: 3}
+--- !u!114 &1405996369329436762 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1531752803237781230, guid: abb359b4516f4954fbba102bb786fd72, type: 3}
+  m_PrefabInstance: {fileID: 487227896472856244}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef8a50cb7f178ed40816fc8ad9d845b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &3616757973619739644 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3815592347992223048, guid: abb359b4516f4954fbba102bb786fd72, type: 3}
+  m_PrefabInstance: {fileID: 487227896472856244}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3183292463351937921
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2077,6 +2151,10 @@ PrefabInstance:
       propertyPath: mapNumber
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 2767117854600257240, guid: af94f4ad3c81efa48be9acc4062684d7, type: 3}
+      propertyPath: rankingLobbyController
+      value: 
+      objectReference: {fileID: 1405996369329436762}
     - target: {fileID: 2872972500908533183, guid: af94f4ad3c81efa48be9acc4062684d7, type: 3}
       propertyPath: m_Layer
       value: 7
