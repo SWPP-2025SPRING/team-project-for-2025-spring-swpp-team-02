@@ -168,5 +168,4 @@ public class Monkey : ObstacleBase
     {
         gameObject.SetActive(false);
     }
-
 }
