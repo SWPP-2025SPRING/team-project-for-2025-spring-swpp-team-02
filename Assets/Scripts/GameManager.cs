@@ -47,6 +47,7 @@ public class GameManager : MonoBehaviour
 
     public Ranking ranking;
     public bool isFirstGame = true;
+    public bool isNetworkConnected = false;
 
     private void Awake()
     {
@@ -82,10 +83,12 @@ public class GameManager : MonoBehaviour
         Debug.Log("[GameManager] StartRun() 호출됨 → runTime 누적 시작");
     }
 
-    // 저장시 정렬해서 저장
     public void AddRecord(float time, int mapNum)
-    {   
-        if (hasSubmitted) return; // 이미 전송했으면 그냥 리턴
+    {
+        if (hasSubmitted)
+        {
+            return; // 이미 전송했으면 그냥 리턴
+        }
         hasSubmitted = true;      // 최초 1회 전송
 
         StartCoroutine(SubmitRecordToServer(nickname, time, mapNum));
@@ -98,7 +101,7 @@ public class GameManager : MonoBehaviour
         Debug.Log($"[Submit] Sending: {json}");
 
         UnityWebRequest request = new UnityWebRequest($"http://{serverIp}:8080/submit", "POST");
-        byte[] bodyRaw = System.Text.Encoding.UTF8.GetBytes(json);
+        byte[] bodyRaw = System.Text.Encoding.UTF8.GetBytes(json);        
         request.uploadHandler = new UploadHandlerRaw(bodyRaw);
         request.downloadHandler = new DownloadHandlerBuffer();
         request.SetRequestHeader("Content-Type", "application/json");
@@ -126,6 +129,7 @@ public class GameManager : MonoBehaviour
             string rawJson = "{\"records\":" + request.downloadHandler.text + "}";
             RecordListWrapper wrapper = JsonUtility.FromJson<RecordListWrapper>(rawJson);
 
+            isNetworkConnected = true;
             if (mapNum == 1)
                 ranking.Map1 = wrapper.records;
             else
@@ -133,6 +137,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
+            isNetworkConnected = false;
             Debug.Log("Fetch failed: " + request.error);
         }
     }
