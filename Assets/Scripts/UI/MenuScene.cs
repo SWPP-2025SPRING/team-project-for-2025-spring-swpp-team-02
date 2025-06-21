@@ -97,8 +97,13 @@ public class MenuScene : MonoBehaviour
 
         GameManager.instance.nickname = nameInputField.text;
 
+        BoingWhenEnabled boing = inputNamePanel.GetComponent<BoingWhenEnabled>();
         inputNamePanel.SetActive(false);
-        inputNamePanel.GetComponent<BoingWhenEnabled>().SetHidden();
+        if (boing != null)
+        {
+            boing.SetHidden();
+        }
+
         manualPanel.SetActive(true);
     }
 
