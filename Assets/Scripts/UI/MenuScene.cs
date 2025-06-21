@@ -22,6 +22,7 @@ public class MenuScene : MonoBehaviour
     public TMP_InputField nameInputField;
     public TMP_InputField ipInputField;
     private int manualNumber = 0;
+    public TextMeshProUGUI nickNameText;
 
     void Start()
     {
@@ -114,6 +115,7 @@ public class MenuScene : MonoBehaviour
         nameInputField.text = "";
         GameManager.instance.nickname = "";
         GameManager.instance.isFirstGame = true;
+        nickNameText.text = "";
         StartCoroutine(HideTextWithDely(initText, 2));
     }
 
@@ -132,6 +134,7 @@ public class MenuScene : MonoBehaviour
         }
 
         GameManager.instance.nickname = nameInputField.text;
+        nickNameText.text = $"도와줘!!! {GameManager.instance.nickname}!!!";
 
         BoingWhenEnabled boing = inputNamePanel.GetComponent<BoingWhenEnabled>();
         inputNamePanel.SetActive(false);
