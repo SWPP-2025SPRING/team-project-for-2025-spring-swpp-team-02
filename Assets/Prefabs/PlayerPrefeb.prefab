@@ -1226,13 +1226,14 @@ GameObject:
   m_Component:
   - component: {fileID: 5087678739232704631}
   - component: {fileID: 5563897713449231579}
+  - component: {fileID: 7809474074208377915}
   m_Layer: 7
   m_Name: ItemUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5087678739232704631
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1263,6 +1264,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3696945006094384782}
   m_CullTransparentMesh: 1
+--- !u!114 &7809474074208377915
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3696945006094384782}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfed9d8ceac9dfd43b2e4f7ad3525a6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scaleAmount: 1.2
+  duration: 0.2
+  easeType: 27
 --- !u!1 &3953531065101951680
 GameObject:
   m_ObjectHideFlags: 0
@@ -1880,6 +1896,10 @@ PrefabInstance:
       propertyPath: centerOfMass.y
       value: -0.35
       objectReference: {fileID: 0}
+    - target: {fileID: 469998019989973565, guid: af94f4ad3c81efa48be9acc4062684d7, type: 3}
+      propertyPath: ghostUI
+      value: 
+      objectReference: {fileID: 3696945006094384782}
     - target: {fileID: 469998019989973565, guid: af94f4ad3c81efa48be9acc4062684d7, type: 3}
       propertyPath: itemUI.Array.size
       value: 1

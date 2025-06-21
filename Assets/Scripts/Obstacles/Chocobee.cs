@@ -41,6 +41,7 @@ public class Chocobee : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            SoundManager.instance.PlayAudio("Effect", "UseItemSound");
             other.gameObject.GetComponent<PlayerUseItem>().ActivateGhostEffect();
             Destroy(gameObject); // 충돌 시 초코비 제거
         }
