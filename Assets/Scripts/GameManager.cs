@@ -48,19 +48,6 @@ public class GameManager : MonoBehaviour
     public Ranking ranking;
     public bool isFirstGame = true;
 
-    [Header("초코비 능력")]
-    private Coroutine ghostCoroutine;
-    public float ghostDuration = 4f;
-
-    private Material ghostMaterial;
-
-    private List<Renderer> obstacleRenderers = new List<Renderer>();
-    private List<Collider> obstacleColliders = new List<Collider>();
-
-    private Dictionary<Renderer, Material> originalMaterials = new Dictionary<Renderer, Material>();
-    private List<(Collider, Collider)> ignoredPairs = new List<(Collider, Collider)>();
-
-
     private void Awake()
     {
         if (instance != null)
@@ -71,8 +58,6 @@ public class GameManager : MonoBehaviour
         {
             instance = this;
             DontDestroyOnLoad(gameObject);
-
-            SceneManager.sceneLoaded += OnSceneLoaded;
         }
     }
 
@@ -80,32 +65,6 @@ public class GameManager : MonoBehaviour
     {
         StartCoroutine(FetchRankingFromServer(1));
         StartCoroutine(FetchRankingFromServer(2));
-
-        // 고스트 머티리얼 초기화 (투명하게 세팅)
-        ghostMaterial = new Material(Shader.Find("Standard"));
-        ghostMaterial.color = new Color(1f, 1f, 1f, 0.3f);
-        SetMaterialTransparent(ghostMaterial);
-    }
-
-    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
-        GameObject[] obstacles = GameObject.FindGameObjectsWithTag("Obstacle");
-
-        obstacleRenderers.Clear();
-        obstacleColliders.Clear();
-
-        foreach (GameObject obstacle in obstacles)
-        {
-            var renderer = obstacle.GetComponent<Renderer>();
-            if (renderer != null)
-                obstacleRenderers.Add(renderer);
-
-            var collider = obstacle.GetComponent<Collider>();
-            if (collider != null)
-                obstacleColliders.Add(collider);
-        }
-
-        Debug.Log($"씬 로드 완료: {obstacleRenderers.Count} 렌더러, {obstacleColliders.Count} 콜라이더 캐싱됨");
     }
 
     void Update()
@@ -176,93 +135,5 @@ public class GameManager : MonoBehaviour
         {
             Debug.Log("Fetch failed: " + request.error);
         }
-    }
-
-    // 초코비 능력: 고스트 효과 활성화
-    public void ActivateGhostEffect(GameObject player)
-    {
-        if (ghostCoroutine != null)
-        {
-            StopCoroutine(ghostCoroutine);
-            ResetGhostEffect();
-        }
-        ghostCoroutine = StartCoroutine(GhostCoroutine(player));
-    }
-
-    private void ResetGhostEffect()
-    {
-        // 충돌 무시 해제
-        foreach (var (obsCol, playerCol) in ignoredPairs)
-        {
-            if (obsCol != null && playerCol != null)
-                Physics.IgnoreCollision(obsCol, playerCol, false);
-        }
-        ignoredPairs.Clear();
-
-        // 머티리얼 원복
-        foreach (var kvp in originalMaterials)
-        {
-            if (kvp.Key != null)
-                kvp.Key.sharedMaterial = kvp.Value;
-        }
-        originalMaterials.Clear();
-    }
-
-    private IEnumerator GhostCoroutine(GameObject player)
-    {
-        Collider[] playerColliders = player.GetComponentsInChildren<Collider>();
-
-        // 충돌 무시 등록
-        foreach (var obsCol in obstacleColliders)
-        {
-            foreach (var playerCol in playerColliders)
-            {
-                Physics.IgnoreCollision(obsCol, playerCol, true);
-                ignoredPairs.Add((obsCol, playerCol));
-            }
-        }
-
-        // 머티리얼 백업 및 고스트 머티리얼 적용
-        foreach (var renderer in obstacleRenderers)
-        {
-            if (!originalMaterials.ContainsKey(renderer))
-            {
-                originalMaterials[renderer] = renderer.sharedMaterial;
-            }
-            renderer.material = ghostMaterial;
-        }
-
-        // 효과 지속 시간 대기
-        yield return new WaitForSeconds(ghostDuration);
-
-        // 충돌 복구
-        foreach (var (obsCol, playerCol) in ignoredPairs)
-        {
-            if (obsCol != null && playerCol != null)
-                Physics.IgnoreCollision(obsCol, playerCol, false);
-        }
-        ignoredPairs.Clear();
-
-        // 머티리얼 복구
-        foreach (var kvp in originalMaterials)
-        {
-            if (kvp.Key != null)
-                kvp.Key.sharedMaterial = kvp.Value;
-        }
-        originalMaterials.Clear();
-
-        ghostCoroutine = null;
-    }
-
-    private void SetMaterialTransparent(Material mat)
-    {
-        mat.SetFloat("_Mode", 3);
-        mat.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.SrcAlpha);
-        mat.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
-        mat.SetInt("_ZWrite", 0);
-        mat.DisableKeyword("_ALPHATEST_ON");
-        mat.EnableKeyword("_ALPHABLEND_ON");
-        mat.DisableKeyword("_ALPHAPREMULTIPLY_ON");
-        mat.renderQueue = (int)UnityEngine.Rendering.RenderQueue.Transparent;
     }
 }

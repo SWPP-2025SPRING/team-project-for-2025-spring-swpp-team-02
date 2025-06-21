@@ -9,6 +9,27 @@ public class PlayerUseItem : MonoBehaviour
     public List<GameObject> itemUI = new List<GameObject>();
     ParticleSystem particle;
 
+    [Header("초코비 능력")]
+    private Coroutine ghostCoroutine;
+    public float ghostDuration = 4f;
+
+    private Material ghostMaterial;
+    // 플레이어 렌더러 + 원래 머티리얼 저장용
+    private List<Renderer> playerRenderers = new();
+    private List<Material> originalPlayerMaterials = new();
+
+    private int originalLayer;
+    public string ghostLayerName = "PlayerWithChocobee"; // 새로 만든 레이어명
+
+
+    void Start()
+    {
+        // 고스트 머티리얼 초기화 (투명하게 세팅)
+        ghostMaterial = new Material(Shader.Find("Standard"));
+        ghostMaterial.color = new Color(1f, 1f, 1f, 0.3f);
+        SetMaterialTransparent(ghostMaterial);
+    }
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space) && itemCount > 0 && !isBoosting)
@@ -64,4 +85,114 @@ public class PlayerUseItem : MonoBehaviour
         yield return new WaitForSeconds(3);
         isBoosting = false;
     }
+
+    // 초코비 능력: 고스트 효과 활성화
+    public void ActivateGhostEffect()
+    {
+        if (ghostCoroutine != null)
+        {
+            StopCoroutine(ghostCoroutine);
+            ResetGhostEffect();
+        }
+
+        // 원래 레이어 저장
+        originalLayer = gameObject.layer;
+
+        // 레이어 변경
+        int ghostLayer = LayerMask.NameToLayer(ghostLayerName);
+        if (ghostLayer != -1)
+            SetLayerRecursively(gameObject, ghostLayer);
+        else
+            Debug.LogWarning($"레이어 '{ghostLayerName}'가 존재하지 않습니다.");
+
+
+        ghostCoroutine = StartCoroutine(GhostCoroutine());
+    }
+
+    private void ResetGhostEffect()
+    {
+
+        // 플레이어 머티리얼 복원
+        int matIndex = 0;
+        foreach (var renderer in playerRenderers)
+        {
+            if (renderer != null)
+            {
+                int count = renderer.sharedMaterials.Length;
+                Material[] originalMats = new Material[count];
+
+                for (int i = 0; i < count; i++)
+                {
+                    if (matIndex < originalPlayerMaterials.Count)
+                    {
+                        originalMats[i] = originalPlayerMaterials[matIndex++];
+                    }
+                }
+
+                renderer.materials = originalMats;
+            }
+        }
+
+        playerRenderers.Clear();
+        originalPlayerMaterials.Clear();
+
+        // 레이어 원복
+        SetLayerRecursively(gameObject, originalLayer);
+    }
+
+    private void SetLayerRecursively(GameObject obj, int newLayer)
+    {
+        obj.layer = newLayer;
+        foreach (Transform child in obj.transform)
+        {
+            SetLayerRecursively(child.gameObject, newLayer);
+        }
+    }
+
+    private IEnumerator GhostCoroutine()
+    {
+        playerRenderers.Clear();
+        originalPlayerMaterials.Clear();
+
+        // 플레이어의 모든 렌더러 수집
+        playerRenderers.AddRange(gameObject.GetComponentsInChildren<Renderer>());
+
+        // 머티리얼 백업 + 반투명 적용
+        foreach (var renderer in playerRenderers)
+        {
+            if (renderer != null)
+            {
+                Material[] originalMats = renderer.sharedMaterials;
+                originalPlayerMaterials.AddRange(originalMats); // 복수 백업
+
+                Material[] ghostMats = new Material[originalMats.Length];
+                for (int i = 0; i < originalMats.Length; i++)
+                {
+                    ghostMats[i] = new Material(ghostMaterial); // 고스트 복제
+                    ghostMats[i].color = new Color(1f, 1f, 1f, 0.3f);
+                }
+
+                renderer.materials = ghostMats; // 전체 교체
+            }
+        }
+
+
+        // 효과 지속 시간 대기
+        yield return new WaitForSeconds(ghostDuration);
+
+        ResetGhostEffect();
+    }
+
+    private void SetMaterialTransparent(Material mat)
+    {
+        mat.SetFloat("_Mode", 3);
+        mat.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.SrcAlpha);
+        mat.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
+        mat.SetInt("_ZWrite", 0);
+        mat.DisableKeyword("_ALPHATEST_ON");
+        mat.EnableKeyword("_ALPHABLEND_ON");
+        mat.DisableKeyword("_ALPHAPREMULTIPLY_ON");
+        mat.renderQueue = (int)UnityEngine.Rendering.RenderQueue.Transparent;
+    }
+
 }

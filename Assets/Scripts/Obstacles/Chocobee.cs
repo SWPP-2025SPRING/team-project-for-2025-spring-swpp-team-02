@@ -41,7 +41,7 @@ public class Chocobee : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            GameManager.instance.ActivateGhostEffect(other.gameObject);
+            other.gameObject.GetComponent<PlayerUseItem>().ActivateGhostEffect();
             Destroy(gameObject); // 충돌 시 초코비 제거
         }
     }

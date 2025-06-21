@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1886613868988648708}
   - component: {fileID: 2799836194892852281}
   - component: {fileID: 1140630351221073233}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Candle_01
   m_TagString: Obstacle
   m_Icon: {fileID: 0}

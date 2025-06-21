@@ -98,7 +98,7 @@ GameObject:
   - component: {fileID: 6554363574096436446}
   m_Layer: 0
   m_Name: Tree_05_LOD0
-  m_TagString: Obstacle
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -206,7 +206,7 @@ GameObject:
   - component: {fileID: 1282714561840611028}
   m_Layer: 0
   m_Name: Tree_05
-  m_TagString: Obstacle
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
