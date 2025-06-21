@@ -2068,6 +2068,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 3696945006094384782}
     - target: {fileID: 469998019989973565, guid: af94f4ad3c81efa48be9acc4062684d7, type: 3}
+      propertyPath: ghostMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 83c03439520ec2b44a954999cffc4749, type: 2}
+    - target: {fileID: 469998019989973565, guid: af94f4ad3c81efa48be9acc4062684d7, type: 3}
       propertyPath: itemUI.Array.size
       value: 1
       objectReference: {fileID: 0}

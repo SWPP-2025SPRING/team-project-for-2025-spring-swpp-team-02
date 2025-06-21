@@ -60,7 +60,6 @@ public class TransitionEffect : MonoBehaviour
     private IEnumerator SceneTransitionEnd()
     {
         transitionUI.fillClockwise = false;
-        SoundManager.instance.ChangeSceneMusic();
         while (transitionUI.fillAmount > 0)
         {
             transitionUI.fillAmount -= Time.deltaTime / transitionTime;

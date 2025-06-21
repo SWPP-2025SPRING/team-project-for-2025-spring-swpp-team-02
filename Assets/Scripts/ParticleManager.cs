@@ -127,6 +127,5 @@ public class ParticleManager : MonoBehaviour
         coolDown[particleName] = true;
         yield return new WaitForSeconds(time);
         coolDown[particleName] = false;
-
     }
 }

@@ -67,7 +67,7 @@ public class LoadingManager : MonoBehaviour
             if (op.progress < 0.9f)
             {
                 Debug.Log(op.progress);
-                progressBar.fillAmount = op.progress * 10 / 9;
+                //progressBar.fillAmount = op.progress * 10 / 9;
             }
             else
             {
