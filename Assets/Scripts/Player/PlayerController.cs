@@ -1,5 +1,4 @@
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -14,9 +13,6 @@ public class PlayerController : MonoBehaviour
     public float rotateSpeed = 360;
     private Vector3 playerMoveDirection;
     private Rigidbody myRigidbody;
-    private KeyCode previousInput = KeyCode.None;
-
-    private bool isParticleDelay = false;
 
     [Header("jump")]
     public bool isJump = false;
@@ -37,7 +33,6 @@ public class PlayerController : MonoBehaviour
         JumpCheck();
     }
 
-    // Update is called once per frame
     void FixedUpdate()
     {
         if (GameManager.instance.isRun)
@@ -107,18 +102,7 @@ public class PlayerController : MonoBehaviour
             transform.position = virtualCamera.transform.position - Vector3.down * 0.5f;
             myRigidbody.velocity = Vector3.zero;
         }
-    }
-    
-    IEnumerator MakeMoveParticle()
-    {
-        isParticleDelay = true;
-        ParticleSystem moveParticle = ParticleManager.instance.GetParticle("PlayerMove");
-        moveParticle.transform.position = transform.position - transform.forward * 0.2f - transform.up * 0.1f;
-
-        yield return new WaitForSeconds(0.05f);
-        isParticleDelay = false;
-    }
-    
+    }    
 
     // 오르막인지 내리막인지에 따라 최대 속도 변화
     private void CheckGound()
@@ -137,20 +121,24 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private Vector3 FindGroundNormal()
+    {
+        if (Physics.Raycast(transform.position, -transform.up, out RaycastHit hit, 1f, groundLayer))
+        {
+            return hit.normal;
+        }
+        else
+        {
+            return transform.up;
+        }
+            
+    }
+
     private void Move()
     {
         if (!isJump)
         {
-            Vector3 groundNormal; // 현재 위치의 바닥 normal 확인
-            if (Physics.Raycast(transform.position, -transform.up, out RaycastHit hit, 1f, groundLayer))
-            {
-                groundNormal = hit.normal;
-            }
-            else
-            {
-                groundNormal = transform.up;
-            }
-
+            Vector3 groundNormal = FindGroundNormal(); // 현재 위치의 바닥 normal 확인
             Vector3 projected_move_dir = Vector3.ProjectOnPlane(playerMoveDirection, groundNormal);
             myRigidbody.AddForce(projected_move_dir.normalized * moveSpeed);
 
@@ -158,16 +146,19 @@ public class PlayerController : MonoBehaviour
 
             // 최대 속도 적용
             if (myRigidbody.velocity.magnitude > maxSpeed)
-            { 
+            {
                 myRigidbody.velocity += (myRigidbody.velocity.normalized * maxSpeed - myRigidbody.velocity) * 0.1f;
             }
 
-            
-            if (!isParticleDelay && myRigidbody.velocity.magnitude > 5) // 움직일 때 생기는 파티클 (현재 임시 제거)
-            { 
-                StartCoroutine(MakeMoveParticle());
+
+            if (myRigidbody.velocity.magnitude > 5) // 움직일 때 생기는 파티클
+            {
+                ParticleManager.instance.PlayWithDelay("PlayerMove",
+                                                       transform.position - transform.forward * 0.2f - transform.up * 0.1f,
+                                                       Quaternion.identity,
+                                                       0.05f);
             }
-            
+
         }
         else
         {

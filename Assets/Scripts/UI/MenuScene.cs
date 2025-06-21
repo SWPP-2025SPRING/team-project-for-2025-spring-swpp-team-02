@@ -1,10 +1,8 @@
  using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
 using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class MenuScene : MonoBehaviour
@@ -13,7 +11,6 @@ public class MenuScene : MonoBehaviour
     public GameObject lobbyPanel;
     public GameObject manualPanel;
     public List<GameObject> manualArray;
-    public GameObject gameEndPanel;
     public TextMeshProUGUI fullScreenButtonText;
     public GameObject caveRanking;
     public GameObject forestRanking;
@@ -184,6 +181,6 @@ public class MenuScene : MonoBehaviour
 
     public void ClickButton()
     {
-        SoundManager.instance.PlayAudio("ButtonClickSound");
+        SoundManager.instance.PlayAudio("Effect", "ButtonClickSound");
     }
 }
