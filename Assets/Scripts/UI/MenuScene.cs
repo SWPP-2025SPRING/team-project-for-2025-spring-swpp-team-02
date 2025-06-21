@@ -67,6 +67,42 @@ public class MenuScene : MonoBehaviour
         ManualInit();
     }
 
+    void Update()
+    {
+        MenuInput();
+    }
+
+    void MenuInput()
+    {
+        if (Input.GetKeyDown(KeyCode.Return))
+        {
+            if (inputNamePanel.activeSelf)
+            {
+                NickNameEnter();
+            }
+        }
+        else if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (optionPanel.activeSelf)
+            {
+                OptionButton();
+            }
+            if (inputNamePanel.activeSelf)
+            {
+                OnOffObject(inputNamePanel);
+            }
+            if (manualPanel.activeSelf)
+            {
+                manualPanel.GetComponent<BoingWhenEnabled>().Hide();
+                manualNumber = 0;
+            }
+            if (lobbyPanel.activeSelf)
+            {
+                Close();
+            }
+        }
+    }
+
     public void ChangeVolume(Scrollbar scrollbar)
     {
         SoundManager.instance.volume = scrollbar.value;
