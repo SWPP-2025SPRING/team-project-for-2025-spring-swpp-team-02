@@ -18,8 +18,6 @@ using UnityEngine.EventSystems;
 public class RankingLobbyController : MonoBehaviour
 {
     [Header("서버 설정")]
-    [Tooltip("예: \"192.168.245.36\" (로컬 Flask 서버 IP)")]
-    public string serverIp;
     public int port = 8080;
 
     [Header("UI 레퍼런스 (버튼 컴포넌트 없이도 클릭 가능)")]
@@ -66,11 +64,6 @@ public class RankingLobbyController : MonoBehaviour
         // 시작할 때 두 패널 모두 비활성화
         caveRankingPanel.SetActive(false);
         forestRankingPanel.SetActive(false);
-    }
-
-    void Start()
-    {
-        serverIp = GameManager.instance.serverIp;
     }
 
     /// <summary>
@@ -133,9 +126,9 @@ public class RankingLobbyController : MonoBehaviour
 
     #region → 서버에서 랭킹 받아와서 Context TextMeshProUGUI에 표시
 
-    private IEnumerator FetchRankingAndPopulate(int mapNum, TextMeshProUGUI targetText)
+    public IEnumerator FetchRankingAndPopulate(int mapNum, TextMeshProUGUI targetText)
     {
-        string url = $"http://{serverIp}:{port}/ranking/{mapNum}";
+        string url = $"http://{GameManager.instance.serverIp}:{port}/ranking/{mapNum}";
         Debug.Log($"[RankingLobby] 서버 요청 → {url}");
 
         using (UnityWebRequest request = UnityWebRequest.Get(url))
