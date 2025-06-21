@@ -35,7 +35,7 @@ public class RankingText : MonoBehaviour
             return;
         }
 
-        for (int i = 1; i <= 10; i++)
+        for (int i = 1; i <= records.Count; i++)
             {
                 float time = records[i - 1].time;
 

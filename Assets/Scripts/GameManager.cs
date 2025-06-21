@@ -119,17 +119,37 @@ public class GameManager : MonoBehaviour
     // 서버에서 랭킹 불러오기
     IEnumerator FetchRankingFromServer(int mapNum)
     {
-        UnityWebRequest request = UnityWebRequest.Get($"http://{serverIp}:8080/ranking/{mapNum}");
+        UnityWebRequest request = UnityWebRequest.Get($"http://{serverIp}:8080/ranking/{mapNum}?nickname={nickname}");
         yield return request.SendWebRequest();
 
         if (request.result == UnityWebRequest.Result.Success)
         {
             string rawJson = "{\"records\":" + request.downloadHandler.text + "}";
             RecordListWrapper wrapper = JsonUtility.FromJson<RecordListWrapper>(rawJson);
+
+            // 중복 닉네임 제거: 가장 빠른 기록만 유지
+            Dictionary<string, float> uniqueRecords = new Dictionary<string, float>();
+            foreach (var record in wrapper.records)
+            {
+                if (!uniqueRecords.ContainsKey(record.name) || record.time < uniqueRecords[record.name])
+                {
+                    uniqueRecords[record.name] = record.time;
+                }
+            }
+            
+            // 다시 리스트로 변환 + 시간 기준 정렬
+            List<Record> cleanedList = new List<Record>();
+            foreach (var pair in uniqueRecords)
+            {
+                cleanedList.Add(new Record(pair.Key, pair.Value));
+            }
+
+            cleanedList.Sort((a, b) => a.time.CompareTo(b.time)); // 오름차순 정렬
+
             if (mapNum == 1)
-                ranking.Map1 = wrapper.records;
+                ranking.Map1 = cleanedList;
             else
-                ranking.Map2 = wrapper.records;
+                ranking.Map2 = cleanedList;
         }
     }
 }

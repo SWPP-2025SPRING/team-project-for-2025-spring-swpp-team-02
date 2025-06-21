@@ -127,7 +127,7 @@ public class RankingLobbyController : MonoBehaviour
 
     public IEnumerator FetchRankingAndPopulate(int mapNum, TextMeshProUGUI targetText)
     {
-        string url = $"http://{GameManager.instance.serverIp}:{port}/ranking/{mapNum}";
+        string url = $"http://{GameManager.instance.serverIp}:{port}/ranking/{mapNum}?nickname={GameManager.instance.nickname}";
         Debug.Log($"[RankingLobby] 서버 요청 → {url}");
 
         using (UnityWebRequest request = UnityWebRequest.Get(url))

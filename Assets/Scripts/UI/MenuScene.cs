@@ -234,7 +234,7 @@ public class MenuScene : MonoBehaviour
 
     private IEnumerator TestServerConnection(int mapNum)
     {
-        string url = $"http://{GameManager.instance.serverIp}:8080/ranking/{mapNum}";
+        string url = $"http://{GameManager.instance.serverIp}:8080/ranking/{mapNum}?nickname={GameManager.instance.nickname}";
 
         using (UnityWebRequest request = UnityWebRequest.Get(url))
         {
