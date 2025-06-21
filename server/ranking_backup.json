@@ -1,46 +1,46 @@
 {
-    "map1": [
-        {
-            "name": "jaepyo",
-            "time": 147.1905
-        }
-    ],
-    "map2": [
-        {
-            "name": "alpakar02",
-            "time": 59.87276
-        },
-        {
-            "name": "alpakar02",
-            "time": 61.10376
-        },
-        {
-            "name": "alpakar02",
-            "time": 62.02427
-        },
-        {
-            "name": "alpakar02",
-            "time": 66.39101
-        },
-        {
-            "name": "alpakar02",
-            "time": 68.65882
-        },
-        {
-            "name": "dd",
-            "time": 69.61556
-        },
-        {
-            "name": "dd",
-            "time": 74.80319
-        },
-        {
-            "name": "alpakar02",
-            "time": 77.68481
-        },
-        {
-            "name": "jaepyo",
-            "time": 82.49992
-        }
-    ]
+  "map1": [
+    {
+      "name": "jaepyo",
+      "time": 147.1905
+    }
+  ],
+  "map2": [
+    {
+      "name": "alpakar02",
+      "time": 59.87276
+    },
+    {
+      "name": "alpakar02",
+      "time": 61.10376
+    },
+    {
+      "name": "alpakar02",
+      "time": 62.02427
+    },
+    {
+      "name": "alpakar02",
+      "time": 66.39101
+    },
+    {
+      "name": "alpakar02",
+      "time": 68.65882
+    },
+    {
+      "name": "dd",
+      "time": 69.61556
+    },
+    {
+      "name": "dd",
+      "time": 74.80319
+    },
+    {
+      "name": "alpakar02",
+      "time": 77.68481
+    },
+    {
+      "name": "jaepyo",
+      "time": 82.49992
+    }
+  ]
 }
