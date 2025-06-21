@@ -11395,6 +11395,7 @@ MonoBehaviour:
     Map1: []
     Map2: []
   isFirstGame: 1
+  ghostDuration: 4
 --- !u!4 &1952219559
 Transform:
   m_ObjectHideFlags: 0

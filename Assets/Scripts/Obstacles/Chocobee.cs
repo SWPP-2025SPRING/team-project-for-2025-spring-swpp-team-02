@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Chocobee : MonoBehaviour
 {
-    public float floatStrength = 0.2f;   // 위아래 움직임 범위
+    public float floatStrength = 1f;   // 위아래 움직임 범위
     public float floatDuration = 1.5f;   // 위아래 한 사이클 시간
     public float rotateStep = 15f;       // 한 번에 회전할 각도
     public float rotateInterval = 0.1f;  // 회전 간격
@@ -41,81 +41,8 @@ public class Chocobee : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            StartCoroutine(MakeObstaclesGhost(other.gameObject));
+            GameManager.instance.ActivateGhostEffect(other.gameObject);
+            Destroy(gameObject); // 충돌 시 초코비 제거
         }
-    }
-    IEnumerator MakeObstaclesGhost(GameObject player)
-    {
-        GameObject[] obstacles = GameObject.FindGameObjectsWithTag("Obstacle");
-        Collider[] playerColliders = player.GetComponentsInChildren<Collider>();
-
-        // 원본 머티리얼 저장 및 충돌 무시, 투명 처리
-        foreach (GameObject obstacle in obstacles)
-        {
-            Collider obsCol = obstacle.GetComponent<Collider>();
-            if (obsCol != null)
-            {
-                foreach (Collider playerCol in playerColliders)
-                {
-                    Physics.IgnoreCollision(obsCol, playerCol, true);
-                    ignoredPairs.Add((obsCol, playerCol));
-                }
-            }
-
-            Renderer renderer = obstacle.GetComponent<Renderer>();
-            if (renderer != null)
-            {
-                if (!originalMaterials.ContainsKey(obstacle))
-                {
-                    originalMaterials[obstacle] = renderer.sharedMaterial;  // sharedMaterial 저장
-                }
-
-                Material matInstance = renderer.material;
-                SetMaterialTransparent(matInstance);
-                Color color = matInstance.color;
-                color.a = 0.3f;
-                matInstance.color = color;
-            }
-        }
-
-        foreach (Transform child in transform)
-        {
-            Destroy(child.gameObject);
-        }
-
-        yield return new WaitForSeconds(ghostDuration);
-
-        // 충돌 복구
-        foreach (var (obsCol, playerCol) in ignoredPairs)
-        {
-            if (obsCol != null && playerCol != null)
-                Physics.IgnoreCollision(obsCol, playerCol, false);
-        }
-        ignoredPairs.Clear();
-
-        // 머티리얼 복구
-        foreach (var kvp in originalMaterials)
-        {
-            var renderer = kvp.Key.GetComponent<Renderer>();
-            if (renderer != null)
-            {
-                renderer.sharedMaterial = kvp.Value;  // sharedMaterial 복구
-            }
-        }
-        originalMaterials.Clear();
-
-        Destroy(gameObject);
-    }
-
-    void SetMaterialTransparent(Material mat)
-    {
-        mat.SetFloat("_Mode", 3);
-        mat.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.SrcAlpha);
-        mat.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
-        mat.SetInt("_ZWrite", 0);
-        mat.DisableKeyword("_ALPHATEST_ON");
-        mat.EnableKeyword("_ALPHABLEND_ON");
-        mat.DisableKeyword("_ALPHAPREMULTIPLY_ON");
-        mat.renderQueue = (int)UnityEngine.Rendering.RenderQueue.Transparent;
     }
 }
