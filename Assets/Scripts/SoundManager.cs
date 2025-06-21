@@ -10,6 +10,7 @@ public class SoundManager : MonoBehaviour
     public float volume = 1;
     private Dictionary<string, Dictionary<string, AudioSource>> audios = new Dictionary<string, Dictionary<string, AudioSource>>();
     private AudioSource currentMusic;
+    private Dictionary<string, bool> coolDown = new Dictionary<string, bool>();
 
     private void Awake()
     {
@@ -63,6 +64,27 @@ public class SoundManager : MonoBehaviour
         }
 
         audios[audioType][audioName].Play();
+    }
+
+    public void PlayAudioWithDelay(string audioType, string audioName, float delay)
+    {
+        if (!coolDown.ContainsKey(audioName))
+        {
+            coolDown.Add(audioName, false);
+        }
+
+        if (!coolDown[audioName])
+        {
+            PlayAudio(audioType, audioName);
+            StartCoroutine(DelayCoroutine(audioName, delay));
+        }
+    }
+
+    private IEnumerator DelayCoroutine(string particleName, float time)
+    {
+        coolDown[particleName] = true;
+        yield return new WaitForSeconds(time);
+        coolDown[particleName] = false;
     }
 
     public void SetVolume()

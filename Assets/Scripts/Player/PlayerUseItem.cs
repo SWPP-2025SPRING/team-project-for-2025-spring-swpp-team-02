@@ -32,40 +32,6 @@ public class PlayerUseItem : MonoBehaviour
         SetMaterialTransparent(ghostMaterial);
     }
 
-    void Update()
-    {
-        //if (Input.GetKeyDown(KeyCode.Space) && itemCount > 0 && !isBoosting)
-        //{
-        //    UseItem();
-        //}
-
-        if (particle != null)
-        {
-            particle.transform.position = transform.position - new Vector3(0, 0.2f, 0);
-        }
-    }
-
-    //public void UseItem()
-    //{
-    //    if (itemCount > 0)
-    //    {
-    //        itemCount--;
-    //        particle = ParticleManager.instance.GetParticle("UseItem");
-    //        StartCoroutine(Boost());
-    //        if (particle != null)
-    //        {
-    //            particle.Play();
-    //        }
-    //    }
-    //}
-
-    IEnumerator Boost()
-    {
-        isBoosting = true;
-        yield return new WaitForSeconds(3);
-        isBoosting = false;
-    }
-
     // 초코비 능력: 고스트 효과 활성화
     public void ActivateGhostEffect()
     {
@@ -107,7 +73,9 @@ public class PlayerUseItem : MonoBehaviour
 
     private void ResetGhostEffect()
     {
-        ghostUI.GetComponent<BoingWhenEnabled>().Hide();
+        //ghostUI.GetComponent<BoingWhenEnabled>().Hide();
+        ghostUI.SetActive(false);
+        ghostUI.GetComponent<BoingWhenEnabled>().SetHidden();
 
         // 플레이어 머티리얼 복원
         int matIndex = 0;

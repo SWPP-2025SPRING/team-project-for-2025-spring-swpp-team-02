@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -7,6 +9,7 @@ public class PlayerCollision : MonoBehaviour
 
     [SerializeField] private float obstacleParticleCooltime = 5;
     private ParticleSystem clearParticle;
+    [SerializeField] private float collisionImpulse = 5;
 
     // 투명 벽과 충돌 시 효과
     void OnCollisionStay(Collision collision)
@@ -25,11 +28,31 @@ public class PlayerCollision : MonoBehaviour
     {
         if (collision.contacts[0].otherCollider.CompareTag("Obstacle"))
         {
-            ParticleManager.instance.PlayWithDelay("ObstacleCollision",
-                                                   collision.contacts[0].point + new Vector3(0, 0.3f, 0),
-                                                   Quaternion.LookRotation(collision.contacts[0].normal),
-                                                   obstacleParticleCooltime);
+            if (collision.impulse.magnitude > collisionImpulse)
+            {
+                PlayCollisionSound();
+                ParticleManager.instance.PlayWithDelay("ObstacleCollision",
+                                                       collision.contacts[0].point + new Vector3(0, 0.3f, 0),
+                                                       Quaternion.LookRotation(collision.contacts[0].normal),
+                                                       obstacleParticleCooltime);
+            }
         }
+        else if (collision.contacts[0].otherCollider.CompareTag("Wall"))
+        {
+            if (collision.impulse.magnitude > collisionImpulse)
+            {
+                PlayCollisionSound();
+            }
+        }
+    }
+
+    void PlayCollisionSound()
+    {
+        List<String> sounds = new List<string>() {"PlayerCollisionSound", "PlayerCollisionSound2", "PlayerCollisionSound3"};
+
+        int randomNumber = UnityEngine.Random.Range(0, sounds.Count);
+
+        SoundManager.instance.PlayAudioWithDelay("Effect", sounds[randomNumber], 0.1f);
     }
 
     // 클리어 구간에 진입
