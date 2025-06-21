@@ -1,4 +1,3 @@
-
 using UnityEngine;
 using DG.Tweening;
 using System.Collections;
@@ -23,22 +22,19 @@ public class BoingWhenEnabled : MonoBehaviour
 
     private void OnEnable()
     {
-        // �ܺο��� SetActive(true) �Ǿ��� ���, ���� üũ
         if (currentState == UIState.Hiding)
         {
-            // ������ ���̾��ٸ� �ߴ��ϰ� �ٽ� �ѱ�
             currentSequence?.Kill();
         }
 
         if (currentState == UIState.Shown || currentState == UIState.Showing)
         {
-            return; // �̹� �����ִٸ� ����
+            return;
         }
 
         StartShow();
     }
 
-    [ContextMenu("����� �׽�Ʈ")]
     public void Hide()
     {
         if (currentState == UIState.Hidden || currentState == UIState.Hiding)
@@ -55,7 +51,7 @@ public class BoingWhenEnabled : MonoBehaviour
         transform.localScale = originalScale * 0.5f;
 
         currentSequence = DOTween.Sequence()
-            .SetUpdate(UpdateType.Late, true)  // LateUpdate�� ���缭 ����, unscaled time���ε� ����
+            .SetUpdate(UpdateType.Late, true)
             .Append(transform.DOScale(originalScale * scaleAmount, duration).SetEase(easeType))
             .Append(transform.DOScale(originalScale, duration * 0.5f))
             .SetLink(gameObject)
@@ -73,7 +69,7 @@ public class BoingWhenEnabled : MonoBehaviour
 
 
         currentSequence = DOTween.Sequence()
-            .SetUpdate(UpdateType.Late, true)  // LateUpdate�� ���缭 ����, unscaled time���ε� ����
+            .SetUpdate(UpdateType.Late, true)
             .Append(transform.DOScale(originalScale * 1.2f, duration * 0.5f).SetEase(easeType))
             .Append(transform.DOScale(Vector3.zero, duration * 0.5f))
             .SetLink(gameObject)
@@ -92,7 +88,7 @@ public class BoingWhenEnabled : MonoBehaviour
 
     IEnumerator DisableNextFrame()
     {
-        yield return null; // ���� �����ӱ��� ���
+        yield return null;
         gameObject.SetActive(false);
     }
 }

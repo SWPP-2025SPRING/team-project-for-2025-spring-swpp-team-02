@@ -9,8 +9,6 @@ public class PlayerAnimation : MonoBehaviour
     {
         myRigidbody = gameObject.GetComponent<Rigidbody>();
     }
-
-    // Update is called once per frame
     void Update()
     {
         animator.speed = myRigidbody.velocity.magnitude * AnimationSpeed;

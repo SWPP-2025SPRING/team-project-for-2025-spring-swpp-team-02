@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -22,12 +21,10 @@ public class LoadingText : MonoBehaviour
     {
         while (true)
         {
-            // �� ������ ���� ���ڿ� ����
-            string dots = new string('.', dotCount).Replace(".", " ."); // ���� ����
+            string dots = new string('.', dotCount).Replace(".", " .");
             loadingText.text = baseText + dots;
 
-            // ���� ������ �غ�
-            dotCount = (dotCount + 1) % 4;  // 0 ~ 3 �ݺ�
+            dotCount = (dotCount + 1) % 4;
             yield return new WaitForSeconds(interval);
         }
     }

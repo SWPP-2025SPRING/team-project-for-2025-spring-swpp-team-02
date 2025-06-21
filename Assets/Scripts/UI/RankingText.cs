@@ -28,22 +28,29 @@ public class RankingText : MonoBehaviour
     void changeRankingText(List<Record> records)
     {
         string text = "";
-        for (int i = 1; i <= 10; i++)
+
+        if (records.Count < 10)
         {
-            float time = records[i - 1].time;
-
-            if (time == float.PositiveInfinity)
-            {
-                text += $"{i}등: {"기록 없음", 19}\n";
-                continue;
-            }
-
-            float min = (int)time / 60;
-            float sec = (int)time % 60;
-            float other = (int)((time - (int)time) * 100);
-
-            text += $"{i}등: {records[i - 1].name, 10} {min, 2:00}:{sec, 2:00}:{other, 2:00}\n";
+            myTextMeshPro.text = "서버 연결 안 됨";
+            return;
         }
+
+        for (int i = 1; i <= 10; i++)
+            {
+                float time = records[i - 1].time;
+
+                if (time == float.PositiveInfinity)
+                {
+                    text += $"{i}등: {"기록 없음",19}\n";
+                    continue;
+                }
+
+                float min = (int)time / 60;
+                float sec = (int)time % 60;
+                float other = (int)((time - (int)time) * 100);
+
+                text += $"{i}등: {records[i - 1].name,10} {min,2:00}:{sec,2:00}:{other,2:00}\n";
+            }
         myTextMeshPro.text = text;
     }
 }
