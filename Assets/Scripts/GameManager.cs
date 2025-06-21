@@ -126,17 +126,10 @@ public class GameManager : MonoBehaviour
         {
             string rawJson = "{\"records\":" + request.downloadHandler.text + "}";
             RecordListWrapper wrapper = JsonUtility.FromJson<RecordListWrapper>(rawJson);
-
-            isNetworkConnected = true;
             if (mapNum == 1)
                 ranking.Map1 = wrapper.records;
             else
                 ranking.Map2 = wrapper.records;
-        }
-        else
-        {
-            isNetworkConnected = false;
-            Debug.Log("Fetch failed: " + request.error);
         }
     }
 }

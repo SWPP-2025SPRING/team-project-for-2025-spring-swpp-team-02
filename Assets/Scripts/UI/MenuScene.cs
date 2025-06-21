@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Networking;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class MenuScene : MonoBehaviour
@@ -82,6 +84,7 @@ public class MenuScene : MonoBehaviour
     public void ServerIpEnter()
     {
         GameManager.instance.serverIp = ipInputField.text;
+        StartCoroutine(TestConnectionsSequentially());
     }
 
     public void NickNameEnter()
@@ -182,5 +185,32 @@ public class MenuScene : MonoBehaviour
     public void ClickButton()
     {
         SoundManager.instance.PlayAudio("Effect", "ButtonClickSound");
+    }
+
+    private IEnumerator TestConnectionsSequentially()
+    {
+        yield return StartCoroutine(TestServerConnection(1));
+        yield return StartCoroutine(TestServerConnection(2));
+    }
+
+    private IEnumerator TestServerConnection(int mapNum)
+    {
+        string url = $"http://{GameManager.instance.serverIp}:8080/ranking/{mapNum}";
+
+        using (UnityWebRequest request = UnityWebRequest.Get(url))
+        {
+            yield return request.SendWebRequest();
+
+            if (request.result == UnityWebRequest.Result.Success)
+            {
+                GameManager.instance.isNetworkConnected = true;
+                Debug.Log("[MenuScene] 서버 연결 성공");
+            }
+            else
+            {
+                GameManager.instance.isNetworkConnected = false;
+                Debug.LogWarning("[MenuScene] 서버 연결 실패: " + request.error);
+            }
+        }
     }
 }
