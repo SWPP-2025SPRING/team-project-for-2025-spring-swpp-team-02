@@ -152,11 +152,15 @@ public class Monkey : ObstacleBase
                 ParticleManager.instance.Play("MonkeyCollision",
                                               collision.contacts[0].point + new Vector3(0, 0.3f, 0),
                                               Quaternion.LookRotation(collision.contacts[0].normal));
-                SoundManager.instance.PlayAudio("Effect", "MonkeyCollisionSound");
+                
                 isPlayingParticle = true;
             }
 
             Invoke(nameof(Off), 1f);
+        }
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            SoundManager.instance.PlayAudioWithDelay("Effect", "MonkeyCollisionSound", 0.05f);
         }
     }
 
