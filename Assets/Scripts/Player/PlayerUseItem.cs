@@ -81,9 +81,13 @@ public class PlayerUseItem : MonoBehaviour
         // 레이어 변경
         int ghostLayer = LayerMask.NameToLayer(ghostLayerName);
         if (ghostLayer != -1)
+        {
             SetLayerRecursively(gameObject, ghostLayer);
+        }
         else
+        {
             Debug.LogWarning($"레이어 '{ghostLayerName}'가 존재하지 않습니다.");
+        }
 
         if (ghostUI != null)
         {
@@ -187,12 +191,17 @@ public class PlayerUseItem : MonoBehaviour
         {
             elapsed += Time.deltaTime;
             if (fillImage != null)
+            {
                 fillImage.fillAmount = Mathf.Lerp(1f, 0f, elapsed / ghostDuration);
+            }
             yield return null;
         }
 
         if (fillImage != null)
+        {
             fillImage.gameObject.SetActive(false);
+        }
+            
 
         // 효과 종료
         ResetGhostEffect();
