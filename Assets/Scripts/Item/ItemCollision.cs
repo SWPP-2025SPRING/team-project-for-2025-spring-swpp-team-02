@@ -6,10 +6,11 @@ public class ItemCollision : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            ParticleManager.instance.Play("ItemCollision", transform.position);
+            ParticleSystem particle = ParticleManager.instance.GetParticle("ItemCollision");
+            particle.transform.position = transform.position;
+            particle.Play();
             
-            other.GetComponent<PlayerUseItem>().GetItem();
-            Destroy(gameObject);
+            //other.GetComponent<PlayerUseItem>().GetItem();
         }
     }
 }

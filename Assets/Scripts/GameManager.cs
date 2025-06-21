@@ -65,7 +65,7 @@ public class GameManager : MonoBehaviour
         StartCoroutine(FetchRankingFromServer(1));
         StartCoroutine(FetchRankingFromServer(2));
     }
-    
+
     void Update()
     {
         if (isRun)
