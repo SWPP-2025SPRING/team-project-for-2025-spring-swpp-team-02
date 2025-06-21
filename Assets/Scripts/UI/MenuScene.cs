@@ -206,11 +206,11 @@ public class MenuScene : MonoBehaviour
         Screen.fullScreen = !Screen.fullScreen;
         if (Screen.fullScreen == true)
         {
-            fullScreenButtonText.text = "OFF";
+            fullScreenButtonText.text = "ON";
         }
         else
         {
-            fullScreenButtonText.text = "ON";
+            fullScreenButtonText.text = "OFF";
         }
     }
 
