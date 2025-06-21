@@ -39,6 +39,7 @@ public class ReadyManager : MonoBehaviour
         SoundManager.instance.PlayAudio("Effect", "StartSound");
         readyImages[3].SetActive(true);
         GameManager.instance.StartRun();
+        SoundManager.instance.ChangeSceneMusic();
         yield return new WaitForSeconds(delay / 2);
 
         readyImages[3].GetComponent<BoingWhenEnabled>().Hide();

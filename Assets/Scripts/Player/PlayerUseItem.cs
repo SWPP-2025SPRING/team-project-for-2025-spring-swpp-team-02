@@ -13,7 +13,6 @@ public class PlayerUseItem : MonoBehaviour
     private Coroutine ghostCoroutine;
     public float ghostDuration = 4f;
 
-    private Material ghostMaterial;
     // 플레이어 렌더러 + 원래 머티리얼 저장용
     private List<Renderer> playerRenderers = new();
     private List<Material> originalPlayerMaterials = new();
@@ -22,15 +21,7 @@ public class PlayerUseItem : MonoBehaviour
     public string ghostLayerName = "PlayerWithChocobee"; // 새로 만든 레이어명
 
     public GameObject ghostUI;
-
-
-    void Start()
-    {
-        // 고스트 머티리얼 초기화 (투명하게 세팅)
-        ghostMaterial = new Material(Shader.Find("Standard"));
-        ghostMaterial.color = new Color(1f, 1f, 1f, 0.3f);
-        SetMaterialTransparent(ghostMaterial);
-    }
+    public Material ghostMaterial;
 
     // 초코비 능력: 고스트 효과 활성화
     public void ActivateGhostEffect()
@@ -169,22 +160,9 @@ public class PlayerUseItem : MonoBehaviour
         {
             fillImage.gameObject.SetActive(false);
         }
-            
+
 
         // 효과 종료
         ResetGhostEffect();
     }
-
-    private void SetMaterialTransparent(Material mat)
-    {
-        mat.SetFloat("_Mode", 3);
-        mat.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.SrcAlpha);
-        mat.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
-        mat.SetInt("_ZWrite", 0);
-        mat.DisableKeyword("_ALPHATEST_ON");
-        mat.EnableKeyword("_ALPHABLEND_ON");
-        mat.DisableKeyword("_ALPHAPREMULTIPLY_ON");
-        mat.renderQueue = (int)UnityEngine.Rendering.RenderQueue.Transparent;
-    }
-
 }

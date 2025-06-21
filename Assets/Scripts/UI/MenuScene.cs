@@ -30,6 +30,11 @@ public class MenuScene : MonoBehaviour
         {
             lobbyPanel.SetActive(true);
         }
+        SoundManager.instance.ChangeSceneMusic();
+        if (GameManager.instance.nickname != "")
+        {
+            nickNameText.text = $"도와줘!!! {GameManager.instance.nickname}!!!";
+        }
     }
 
     public void ManualInit()
