@@ -30,11 +30,18 @@ public class MenuScene : MonoBehaviour
         {
             lobbyPanel.SetActive(true);
         }
-        SoundManager.instance.ChangeSceneMusic();
         if (GameManager.instance.nickname != "")
         {
             nickNameText.text = $"도와줘!!! {GameManager.instance.nickname}!!!";
         }
+        ipInputField.text = GameManager.instance.serverIp;
+        StartCoroutine(PlayMusicInit());
+    }
+
+    IEnumerator PlayMusicInit()
+    {
+        yield return new WaitForEndOfFrame();
+        SoundManager.instance.ChangeSceneMusic();
     }
 
     public void ManualInit()
