@@ -97,7 +97,7 @@ public class PlayerController : MonoBehaviour
         {
             TransitionEffect.instance.MoveScene("MenuScene");
         }
-        if (Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.R) && GameManager.instance.isRun)
         {
             transform.position = virtualCamera.transform.position - Vector3.down * 0.5f;
             myRigidbody.velocity = Vector3.zero;
