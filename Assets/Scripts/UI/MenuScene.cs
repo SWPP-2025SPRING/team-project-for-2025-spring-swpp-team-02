@@ -35,6 +35,7 @@ public class MenuScene : MonoBehaviour
         {
             nickNameText.text = $"도와줘!!! {GameManager.instance.nickname}!!!";
         }
+        ipInputField.text = GameManager.instance.serverIp;
     }
 
     public void ManualInit()
