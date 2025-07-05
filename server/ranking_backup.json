@@ -1,214 +1,214 @@
 {
-    "map1": [
-        {
-            "name": "minseo",
-            "time": 88.85159
-        },
-        {
-            "name": "GM_alpakar02",
-            "time": 78.52679
-        },
-        {
-            "name": "nakyoung",
-            "time": 86.91712
-        },
-        {
-            "name": "JUNAH",
-            "time": 135.0696
-        },
-        {
-            "name": "jungbin128",
-            "time": 95.67572
-        },
-        {
-            "name": "jueun",
-            "time": 91.343
-        },
-        {
-            "name": "zZEONGB",
-            "time": 89.29089
-        },
-        {
-            "name": "nyangtae",
-            "time": 85.69869
-        },
-        {
-            "name": "iMO_INTERNAPPLY",
-            "time": 92.75989
-        },
-        {
-            "name": "seungyeon",
-            "time": 124.2781
-        },
-        {
-            "name": "MOONJH",
-            "time": 86.06465
-        },
-        {
-            "name": "byungho",
-            "time": 95.92682
-        },
-        {
-            "name": "moon",
-            "time": 84.51048
-        },
-        {
-            "name": "Taehyun",
-            "time": 83.37647
-        },
-        {
-            "name": "soo",
-            "time": 98.03133
-        },
-        {
-            "name": "king_dave",
-            "time": 87.18373
-        },
-        {
-            "name": "IMO",
-            "time": 78.76448
-        },
-        {
-            "name": "tae",
-            "time": 84.71011
-        },
-        {
-            "name": "pgh",
-            "time": 113.5146
-        },
-        {
-            "name": "GM_anjwl",
-            "time": 79.0736
-        },
-        {
-            "name": "testing",
-            "time": 86.78787
-        },
-        {
-            "name": "SGY",
-            "time": 86.2667
-        },
-        {
-            "name": "250",
-            "time": 83.59855
-        },
-        {
-            "name": "Pumpkinbee_Kim",
-            "time": 79.92468
-        },
-        {
-            "name": "Chicken_Joa",
-            "time": 79.39664
-        },
-        {
-            "name": "Ahuel_Cutie",
-            "time": 79.73062
-        },
-        {
-            "name": "huhuhuu",
-            "time": 133.7753
-        }
-    ],
-    "map2": [
-        {
-            "name": "GM_anjwl",
-            "time": 55.16648
-        },
-        {
-            "name": "nakyoung",
-            "time": 69.16408
-        },
-        {
-            "name": "jungbin128",
-            "time": 61.90849
-        },
-        {
-            "name": "jj",
-            "time": 59.87432
-        },
-        {
-            "name": "IMO_INTERNAPPLY",
-            "time": 60.68394
-        },
-        {
-            "name": "iMO_INTERNAPPLY",
-            "time": 72.50555
-        },
-        {
-            "name": "seungyeon",
-            "time": 88.80754
-        },
-        {
-            "name": "JB_Won",
-            "time": 68.63103
-        },
-        {
-            "name": "MOONJH",
-            "time": 59.0843
-        },
-        {
-            "name": "soo",
-            "time": 77.74071
-        },
-        {
-            "name": "king_dave",
-            "time": 64.98525
-        },
-        {
-            "name": "pgh",
-            "time": 59.04134
-        },
-        {
-            "name": "moon",
-            "time": 67.74772
-        },
-        {
-            "name": "jonggang plz",
-            "time": 68.04759
-        },
-        {
-            "name": "GM_alpakar02",
-            "time": 55.12668
-        },
-        {
-            "name": "SGY",
-            "time": 64.5159
-        },
-        {
-            "name": "250",
-            "time": 60.69987
-        },
-        {
-            "name": "Pumpkinbee_Kim",
-            "time": 55.33184
-        },
-        {
-            "name": "Chicken_Joa",
-            "time": 55.1546
-        },
-        {
-            "name": "KyoSoo",
-            "time": 78.14896
-        },
-        {
-            "name": "Ahuel_Cutie",
-            "time": 55.50511
-        },
-        {
-            "name": "Team10",
-            "time": 66.63941
-        },
-        {
-            "name": "ren",
-            "time": 66.06973
-        },
-        {
-            "name": "IMO",
-            "time": 65.94178
-        },
-        {
-            "name": "huhuhuu",
-            "time": 120.412
-        }
-    ]
+  "map1": [
+    {
+      "name": "minseo",
+      "time": 88.85159
+    },
+    {
+      "name": "GM_alpakar02",
+      "time": 78.52679
+    },
+    {
+      "name": "nakyoung",
+      "time": 86.91712
+    },
+    {
+      "name": "JUNAH",
+      "time": 135.0696
+    },
+    {
+      "name": "jungbin128",
+      "time": 95.67572
+    },
+    {
+      "name": "jueun",
+      "time": 91.343
+    },
+    {
+      "name": "zZEONGB",
+      "time": 89.29089
+    },
+    {
+      "name": "nyangtae",
+      "time": 85.69869
+    },
+    {
+      "name": "iMO_INTERNAPPLY",
+      "time": 92.75989
+    },
+    {
+      "name": "seungyeon",
+      "time": 124.2781
+    },
+    {
+      "name": "MOONJH",
+      "time": 86.06465
+    },
+    {
+      "name": "byungho",
+      "time": 95.92682
+    },
+    {
+      "name": "moon",
+      "time": 84.51048
+    },
+    {
+      "name": "Taehyun",
+      "time": 83.37647
+    },
+    {
+      "name": "soo",
+      "time": 98.03133
+    },
+    {
+      "name": "king_dave",
+      "time": 87.18373
+    },
+    {
+      "name": "IMO",
+      "time": 78.76448
+    },
+    {
+      "name": "tae",
+      "time": 84.71011
+    },
+    {
+      "name": "pgh",
+      "time": 113.5146
+    },
+    {
+      "name": "GM_anjwl",
+      "time": 79.0736
+    },
+    {
+      "name": "testing",
+      "time": 86.78787
+    },
+    {
+      "name": "SGY",
+      "time": 86.2667
+    },
+    {
+      "name": "250",
+      "time": 83.59855
+    },
+    {
+      "name": "Pumpkinbee_Kim",
+      "time": 79.92468
+    },
+    {
+      "name": "Chicken_Joa",
+      "time": 79.39664
+    },
+    {
+      "name": "Ahuel_Cutie",
+      "time": 79.73062
+    },
+    {
+      "name": "huhuhuu",
+      "time": 133.7753
+    }
+  ],
+  "map2": [
+    {
+      "name": "GM_anjwl",
+      "time": 55.16648
+    },
+    {
+      "name": "nakyoung",
+      "time": 69.16408
+    },
+    {
+      "name": "jungbin128",
+      "time": 61.90849
+    },
+    {
+      "name": "jj",
+      "time": 59.87432
+    },
+    {
+      "name": "IMO_INTERNAPPLY",
+      "time": 60.68394
+    },
+    {
+      "name": "iMO_INTERNAPPLY",
+      "time": 72.50555
+    },
+    {
+      "name": "seungyeon",
+      "time": 88.80754
+    },
+    {
+      "name": "JB_Won",
+      "time": 68.63103
+    },
+    {
+      "name": "MOONJH",
+      "time": 59.0843
+    },
+    {
+      "name": "soo",
+      "time": 77.74071
+    },
+    {
+      "name": "king_dave",
+      "time": 64.98525
+    },
+    {
+      "name": "pgh",
+      "time": 59.04134
+    },
+    {
+      "name": "moon",
+      "time": 67.74772
+    },
+    {
+      "name": "jonggang plz",
+      "time": 68.04759
+    },
+    {
+      "name": "GM_alpakar02",
+      "time": 55.12668
+    },
+    {
+      "name": "SGY",
+      "time": 64.5159
+    },
+    {
+      "name": "250",
+      "time": 60.69987
+    },
+    {
+      "name": "Pumpkinbee_Kim",
+      "time": 55.33184
+    },
+    {
+      "name": "Chicken_Joa",
+      "time": 55.1546
+    },
+    {
+      "name": "KyoSoo",
+      "time": 78.14896
+    },
+    {
+      "name": "Ahuel_Cutie",
+      "time": 55.50511
+    },
+    {
+      "name": "Team10",
+      "time": 66.63941
+    },
+    {
+      "name": "ren",
+      "time": 66.06973
+    },
+    {
+      "name": "IMO",
+      "time": 65.94178
+    },
+    {
+      "name": "huhuhuu",
+      "time": 120.412
+    }
+  ]
 }
