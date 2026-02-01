@@ -27,11 +27,6 @@
 
 ![Blender](https://img.shields.io/badge/blender-%23F5792A.svg?style=for-the-badge&logo=blender&logoColor=white)
 
-### Collaboration & DevOps
-
-![Git](https://img.shields.io/badge/git-%23F05033.svg?style=for-the-badge&logo=git&logoColor=white)
-![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)
-
 ---
 
 ## 👨‍👩‍👧‍👦 Contributors & Roles (2조는 못말려)
@@ -87,7 +82,6 @@
 
 ### 2. 실시간 랭킹 시스템
 
-- **Stack**: Python Flask
 - **Logic**: 동일 닉네임 유저의 기록 중 최단 기록만 저장하여 랭킹 도배를 방지했습니다.
 - **UX**: 자신이 10위권 밖($> 10$)인 경우, 상위 10명과 함께 본인의 순위/최고 기록을 하단에 별도로 표시합니다.
 
